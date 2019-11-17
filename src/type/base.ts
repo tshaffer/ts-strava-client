@@ -1,3 +1,15 @@
+export interface StravaModelState {
+  activities: ActivitiesState;
+}
+
+export interface ActivitiesState {
+  activities: ActivitiesMap;
+}
+
+export interface ActivitiesMap {
+  [id: string]: Activity;
+}
+
 export interface Athlete {
   id: string;
   nickname: string;
@@ -22,3 +34,4 @@ export interface Activity {
   startDateLocal: string;
   totalElevationGain: number;
 }
+
