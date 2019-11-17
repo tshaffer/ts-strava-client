@@ -15,6 +15,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { rootReducer } from './model';
 
 import App from './components/app';
+import Activities from './components/activities';
 
 const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -26,6 +27,7 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
       <Route path='/' component={App} />
+      <Route path='/activities' component={Activities} />
     </Router>
   </Provider>,
   document.getElementById('content') as HTMLElement,
