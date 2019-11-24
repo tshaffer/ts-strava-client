@@ -2,19 +2,34 @@ import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { ActivitiesState, Activity } from '../type';
+import { hashHistory } from 'react-router';
+
+// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { ActivitiesMap, Activity } from '../type';
 import { getActivities } from '../selector';
 
 import * as Converters from '../utilities/converters';
 
 export interface ActivitiesProps {
-  activities: ActivitiesState;
+  activities: ActivitiesMap;
 }
 
 class Activities extends React.Component<ActivitiesProps> {
 
+  constructor(props: ActivitiesProps) {
+    super(props);
+
+    this.handleShowDetailedMap = this.handleShowDetailedMap.bind(this);
+  }
+
+  handleShowDetailedMap(activityId: number) {
+    console.log('handleShowDetailedMap: ', activityId);
+    hashHistory.push('/detailedActivity/' + activityId.toString());
+  }
+
   buildSummaryActivityRow(activity: Activity): any {
+
+    const self = this;
 
     let calories = '';
     if (activity.kilojoules) {
@@ -44,6 +59,9 @@ class Activities extends React.Component<ActivitiesProps> {
         <td>
           {calories}
         </td>
+        <td>
+          <button onClick={() => self.handleShowDetailedMap(activity.id)}>Show details</button>
+        </td>
       </tr>
     );
   }
@@ -52,7 +70,7 @@ class Activities extends React.Component<ActivitiesProps> {
 
     const activities: Activity[] = [];
 
-    const activitiesLUT = this.props.activities.activities;
+    const activitiesLUT = this.props.activities;
 
     for (const activityId in activitiesLUT) {
       if (activitiesLUT.hasOwnProperty(activityId)) {
@@ -106,6 +124,7 @@ class Activities extends React.Component<ActivitiesProps> {
                 <th>Elevation</th>
                 <th>Average Speed</th>
                 <th>Calories</th>
+                <th/>
               </tr>
             </thead>
             <tbody>

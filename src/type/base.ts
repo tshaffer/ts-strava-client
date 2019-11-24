@@ -1,8 +1,4 @@
 export interface StravaModelState {
-  activities: ActivitiesState;
-}
-
-export interface ActivitiesState {
   activities: ActivitiesMap;
 }
 

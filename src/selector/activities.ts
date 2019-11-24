@@ -1,6 +1,6 @@
-import { StravaModelState, ActivitiesState } from '../type';
+import { StravaModelState, ActivitiesMap } from '../type';
 
-export const getActivities = (state: StravaModelState): ActivitiesState => {
+export const getActivities = (state: StravaModelState): ActivitiesMap => {
   return state.activities;
 };
 
