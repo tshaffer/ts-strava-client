@@ -16,3 +16,7 @@ export interface StravaModelBaseAction<T> extends Action {
 export interface ActivityAction<T> extends StravaBaseAction {
   payload: T;
 }
+
+export interface DetailedActivityAction<T> extends StravaBaseAction {
+  payload: T;
+}

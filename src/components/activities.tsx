@@ -105,8 +105,6 @@ class Activities extends React.Component<ActivitiesProps> {
 
   render() {
 
-    console.log(Object.keys(this.props.activities).length);
-
     if (Object.keys(this.props.activities).length > 0) {
 
       const activityRows = this.buildActivityRows();

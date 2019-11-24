@@ -50,7 +50,6 @@ function mapStateToProps(state: any) {
 const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators({
     onShowActivities: loadSummaryActivities,
-
   }, dispatch);
 };
 

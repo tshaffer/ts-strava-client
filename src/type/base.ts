@@ -1,5 +1,6 @@
 export interface StravaModelState {
   activities: ActivitiesMap;
+  detailedActivities: DetailedActivitiesMap;
 }
 
 export interface ActivitiesMap {
@@ -31,3 +32,10 @@ export interface Activity {
   totalElevationGain: number;
 }
 
+export interface DetailedActivity {
+  id: number;
+}
+
+export interface DetailedActivitiesMap {
+  [id: string]: DetailedActivity;
+}
