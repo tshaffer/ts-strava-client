@@ -32,10 +32,41 @@ export interface Activity {
   totalElevationGain: number;
 }
 
-export interface DetailedActivity {
-  id: number;
-}
-
 export interface DetailedActivitiesMap {
   [id: string]: DetailedActivity;
+}
+
+export interface Segment {
+  id: number;
+  name: string;
+  distance: number;
+  averageGrade: number;
+  maximumGrade: number;
+  elevationHigh: number;
+  elevationLow: number;
+}
+
+export interface Achievement {
+  type: string;
+  rank: number;
+}
+
+export interface SegmentEffort {
+  id: number;
+  name: string;
+  elapsedTime: number;
+  movingTime: number;
+  startDateLocal: Date;
+  distance: number;
+  averageWatts: number;
+  segment: Segment;
+  prRank: number;
+  achievements: Achievement[];
+}
+
+export interface DetailedActivity extends Activity {
+  mapPolyline: string;
+  averageTemp: string;
+  averageWatts: string;
+  segmentEfforts: SegmentEffort[];
 }
