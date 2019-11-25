@@ -1,11 +1,26 @@
 export interface StravaModelState {
   activities: ActivitiesMap;
-  detailedActivities: DetailedActivitiesMap;
+  detailedActivities: DetailedActivityAttributesMap;
+  segments: SegmentsMap;
+  segmentEfforts: SegmentEffortsMap;
 }
 
 export interface ActivitiesMap {
-  [id: string]: Activity;
+  [id: string]: Activity; // activityid
 }
+
+export interface DetailedActivityAttributesMap {
+  [id: string]: DetailedActivityAttributes; // activityId
+}
+
+export interface SegmentsMap {
+  [id: string]: Segment; // segmentId
+}
+
+export interface SegmentEffortsMap {
+  [id: string]: SegmentEffort; // segmentEffortId
+}
+
 
 export interface Athlete {
   id: string;
@@ -32,10 +47,6 @@ export interface Activity {
   totalElevationGain: number;
 }
 
-export interface DetailedActivitiesMap {
-  [id: string]: DetailedActivity;
-}
-
 export interface Segment {
   id: number;
   name: string;
@@ -51,7 +62,7 @@ export interface Achievement {
   rank: number;
 }
 
-export interface SegmentEffort {
+export interface SegmentEffortWithSegment {
   id: number;
   name: string;
   elapsedTime: number;
@@ -64,9 +75,30 @@ export interface SegmentEffort {
   achievements: Achievement[];
 }
 
+export interface SegmentEffort {
+  id: number;
+  name: string;
+  activityId: number;
+  elapsedTime: number;
+  movingTime: number;
+  startDateLocal: Date;
+  distance: number;
+  averageWatts: number;
+  segmentId: number;
+  prRank: number;
+  achievements: Achievement[];
+}
+
 export interface DetailedActivity extends Activity {
   mapPolyline: string;
   averageTemp: string;
   averageWatts: string;
-  segmentEfforts: SegmentEffort[];
+  segmentEfforts: SegmentEffortWithSegment[];
+}
+
+export interface DetailedActivityAttributes {
+  id: number;
+  mapPolyline: string;
+  averageTemp: string;
+  averageWatts: string;
 }

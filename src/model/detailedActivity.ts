@@ -1,11 +1,12 @@
 import { cloneDeep } from 'lodash';
-import { DetailedActivity, DetailedActivitiesMap } from '../type';
+import { DetailedActivity, DetailedActivityAttributesMap, DetailedActivityAttributes, SegmentEffort, Segment } from '../type';
 import { StravaModelBaseAction, DetailedActivityAction } from './baseAction';
 
 // ------------------------------------
 // Constants
 // ------------------------------------
-export const ADD_DETAILED_ACTIVITY = 'ADD_DETAILED_ACTIVITY';
+// export const ADD_DETAILED_ACTIVITY = 'ADD_DETAILED_ACTIVITY';
+export const ADD_DETAILED_ACTIVITY_ATTRIBUTES = 'ADD_DETAILED_ACTIVITY_ATTRIBUTES';
 
 // ------------------------------------
 // Actions
@@ -13,40 +14,53 @@ export const ADD_DETAILED_ACTIVITY = 'ADD_DETAILED_ACTIVITY';
 
 export type PartialDetailedActivityDescription = Partial<DetailedActivity>;
 
-export interface AddDetailedActivityPayload {
-  detailedActivityId: string;
-  detailedActivity: DetailedActivity;
+export interface AddDetailedActivityAttributesPayload {
+  activityId: string;
+  detailedActivityAttributes: DetailedActivityAttributes;
 }
 
-export const addDetailedActivity = (
-  detailedActivityId: string,
-  detailedActivity: DetailedActivity
-): DetailedActivityAction<AddDetailedActivityPayload> => {
-
+export const addDetailedActivityAttributes = (
+  activityId: number,
+  detailedActivityAttributes: DetailedActivityAttributes
+): any => {
   return {
-    type: ADD_DETAILED_ACTIVITY,
+    type: ADD_DETAILED_ACTIVITY_ATTRIBUTES,
     payload: {
-      detailedActivityId,
-      detailedActivity,
+      activityId,
+      detailedActivityAttributes,
     },
   };
 };
+
+// export const addDetailedActivity = (
+//   detailedActivityId: string,
+//   detailedActivity: DetailedActivity
+// ): DetailedActivityAction<AddDetailedActivityPayload> => {
+
+//   return {
+//     type: ADD_DETAILED_ACTIVITY,
+//     payload: {
+//       detailedActivityId,
+//       detailedActivity,
+//     },
+//   };
+// };
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 
-const initialState: DetailedActivitiesMap = {};
+const initialState: DetailedActivityAttributesMap = {};
 
 export const detailedActivityReducer = (
-  state: DetailedActivitiesMap = initialState,
-  action: StravaModelBaseAction<PartialDetailedActivityDescription & AddDetailedActivityPayload>
-): DetailedActivitiesMap => {
+  state: DetailedActivityAttributesMap = initialState,
+  action: StravaModelBaseAction<PartialDetailedActivityDescription & AddDetailedActivityAttributesPayload>
+): DetailedActivityAttributesMap => {
   switch (action.type) {
-    case ADD_DETAILED_ACTIVITY: {
+    case ADD_DETAILED_ACTIVITY_ATTRIBUTES: {
       const newState = cloneDeep(state);
-      const { detailedActivityId, detailedActivity } = action.payload;
-      newState[detailedActivityId] = detailedActivity;
+      const { activityId, detailedActivityAttributes: detailedActivity } = action.payload;
+      newState[activityId] = detailedActivity;
       return newState;
     }
     default:
