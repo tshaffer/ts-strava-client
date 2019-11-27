@@ -1,9 +1,12 @@
 import { filter } from 'lodash';
 
-import { StravaModelState, DetailedActivityAttributes, SegmentEffortsMap, SegmentEffort } from '../type';
+import { StravaModelState, DetailedActivityAttributes, SegmentEffortsMap, SegmentEffort, Activity, Segment, SegmentsMap } from '../type';
 
 export const getDetailedActivityAttributes = (state: StravaModelState, activityId: number): DetailedActivityAttributes => {
-    return state.detailedActivities[activityId];
+  const activity: Activity = state.activities[activityId];
+  const detailedActivity: DetailedActivityAttributes = state.detailedActivities[activityId];
+  const fullActivity = Object.assign( {}, activity, detailedActivity);
+  return fullActivity;
 };
 
 // https://lodash.com/docs/4.17.15#filter
@@ -24,4 +27,12 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
   });
 
   return segmentsInActivity;
+};
+
+// export const getSegment = (state: StravaModelState, segmentId: number): Segment => {
+//   return state.segments[segmentId];
+// };
+
+export const getSegments = (state: StravaModelState): SegmentsMap => {
+  return state.segments;
 };
