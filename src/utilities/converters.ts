@@ -25,7 +25,7 @@ export function getMovingTime(moving_time: number) {
   return movingTime;
 }
 
-export function getDateTime(dateTime: string) {
+export function getDateTime(dateTime: any) {
   // var d = new Date(dateTime);
   // var date = d.toLocaleString();
   return new Date(dateTime).toLocaleDateString();

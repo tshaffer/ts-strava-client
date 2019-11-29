@@ -12,11 +12,12 @@ export const loadDetailedActivity = (activityId: number): any => {
         const detailedActivity: DetailedActivity = response.data as DetailedActivity;
         // console.log(detailedActivity);
 
+        // TEDTODO - not sure of the following...
         const detailedActivityAttributes: DetailedActivityAttributes = {
           id: detailedActivity.id,
-          mapPolyline: detailedActivity.mapPolyline,
+          // mapPolyline: detailedActivity.mapPolyline,
           averageWatts: detailedActivity.averageWatts,
-          averageTemp: detailedActivity.averageTemp,
+          // averageTemp: detailedActivity.averageTemp,
         };
         dispatch(addDetailedActivityAttributes(activityId, detailedActivityAttributes));
 
