@@ -15,9 +15,9 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
   const segmentEfforts: SegmentEffort[] = [];
 
   const segmentEffortsMap: SegmentEffortsMap = state.segmentEfforts;
-  for (const segmentEffortActivityId in segmentEffortsMap) {
-    if (segmentEffortsMap.hasOwnProperty(segmentEffortActivityId)) {
-      const segmentEffort: SegmentEffort = segmentEffortsMap[segmentEffortActivityId];
+  for (const segmentEffortId in segmentEffortsMap) {
+    if (segmentEffortsMap.hasOwnProperty(segmentEffortId)) {
+      const segmentEffort: SegmentEffort = segmentEffortsMap[segmentEffortId];
       segmentEfforts.push(segmentEffort);
     }
   }
