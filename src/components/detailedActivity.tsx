@@ -290,8 +290,8 @@ function mapStateToProps(state: any, ownProps: any) {
 
   return {
     params: ownProps.params,
-    detailedActivity: getDetailedActivityAttributes(state, ownProps.params.id),
-    segmentEfforts: getSegmentEffortsForActivity(state, ownProps.params.id),
+    detailedActivity: getDetailedActivityAttributes(state, parseInt(ownProps.params.id, 10)),
+    segmentEfforts: getSegmentEffortsForActivity(state, parseInt(ownProps.params.id, 10)),
     segmentsMap: getSegments(state),
   };
 }

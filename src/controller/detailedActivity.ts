@@ -37,7 +37,8 @@ export const loadDetailedActivity = (activityId: number): any => {
           //   prRank: segmentEffortWithSegment.prRank,
           //   achievements: segmentEffortWithSegment.achievements,
           // };
-          dispatch(addSegmentEffort(segmentEffort.id, segmentEffort));
+          // dispatch(addSegmentEffort(segmentEffort.id, segmentEffort));
+          dispatch(addSegmentEffort(activityId, segmentEffort));
           dispatch(addSegment(segmentEffort.segment.id, segmentEffort.segment));
         }
 

@@ -14,19 +14,19 @@ export const ADD_SEGMENT_EFFORT = 'ADD_SEGMENT_EFFORT';
 export type PartialSegmentEffortDescription = Partial<SegmentEffort>;
 
 export interface AddSegmentEffortPayload {
-  segmentEffortId: number;
+  activityId: number;
   segmentEffort: SegmentEffort;
 }
 
 export const addSegmentEffort = (
-  segmentEffortId: number,
+  activityId: number,
   segmentEffort: SegmentEffort
 ): SegmentEffortAction<AddSegmentEffortPayload> => {
 
   return {
     type: ADD_SEGMENT_EFFORT,
     payload: {
-      segmentEffortId,
+      activityId,
       segmentEffort,
     },
   };
@@ -45,8 +45,8 @@ export const segmentEffortReducer = (
   switch (action.type) {
     case ADD_SEGMENT_EFFORT: {
       const newState = cloneDeep(state);
-      const { segmentEffortId, segmentEffort } = action.payload;
-      newState[segmentEffortId] = segmentEffort;
+      const { activityId, segmentEffort } = action.payload;
+      newState[activityId] = segmentEffort;
       return newState;
     }
     default:
