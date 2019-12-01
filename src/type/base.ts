@@ -52,13 +52,20 @@ export interface Segment {
   climbCategory: number;
   endLatlng: StravaNativeLatLng;
   startLatLng: StravaNativeLatLng;
-  startDate: Date;
-  startDateLocal: Date;
+  // startDate: Date;
+  // startDateLocal: Date;
+}
+
+export interface DetailedSegment extends Segment {
+  totalElevationGain: number;
+  map: StravaNativePolylineMap;
+  effortCount: number;
 }
 
 export interface Achievement {
   type: string;
   rank: number;
+  typeId: number;
 }
 
 export interface SegmentEffortWithSegment {
@@ -89,9 +96,15 @@ export interface SegmentEffort {
   startDateLocal: Date;
   distance: number;
   averageWatts: number;
-  segmentId: number;
+  segment: Segment;
   prRank: number;
   achievements: Achievement[];
+  averageCadence: number;
+  averageHeartrate: number;
+  deviceWatts: boolean;
+  maxHeartrate: number;
+  startDate: Date;
+
 }
 
 export interface Activity {
@@ -142,9 +155,26 @@ export interface DetailedActivity extends Activity {
   type: string;
 }
 
-export interface DetailedActivityAttributes {
-  id: number;
-  // mapPolyline: string;
-  // averageTemp: number;
-  averageWatts: number;
+export interface Stream {
+  data: any[];   // type is dependent on type of stream
+  original_size: number;
+  resolution: string;
+  series_type: string;
+  type: string;
 }
+
+export interface DetailedActivityAttributes {
+  calories: number;
+  segmentEfforts: SegmentEffort[];
+  map: StravaNativePolylineMap;
+  streams: Stream[];
+}
+
+export interface DetailedActivityData {
+  detailedActivityAttributes: DetailedActivityAttributes;
+  detailedSegments: DetailedSegment[];
+  locationData: any[]; // array of 2 element arrays [lat, lng]?
+  segmentEfforts: SegmentEffort[];
+  segments: Segment[];
+}
+
