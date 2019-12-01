@@ -23,6 +23,10 @@ export const loadDetailedActivity = (activityId: number): any => {
         // };
         dispatch(addDetailedActivityAttributes(activityId, detailedActivityAttributes));
 
+        for (const detailedSegment of detailedSegments) {
+          dispatch(addSegment(detailedSegment.id, detailedSegment));
+        }
+        
         for (const segmentEffort of segmentEfforts) {
           // const segmentEffort: SegmentEffort = {
           //   id: segmentEffortWithSegment.id,
@@ -39,7 +43,7 @@ export const loadDetailedActivity = (activityId: number): any => {
           // };
           dispatch(addSegmentEffort(segmentEffort.id, segmentEffort));
           // dispatch(addSegmentEffort(activityId, segmentEffort));
-          dispatch(addSegment(segmentEffort.segment.id, segmentEffort.segment));
+          // dispatch(addSegment(segmentEffort.segment.id, segmentEffort.segment));
         }
 
         console.log('done');

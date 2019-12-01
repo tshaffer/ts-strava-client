@@ -9,7 +9,7 @@ import * as Converters from '../utilities/converters';
 import {
   loadDetailedActivity
 } from '../controller';
-import { DetailedActivity, SegmentEffortWithSegment, Segment, DetailedActivityAttributes, SegmentEffort, SegmentsMap } from '../type';
+import { DetailedActivity, SegmentEffortWithSegment, Segment, DetailedActivityAttributes, SegmentEffort, SegmentsMap, DetailedSegment } from '../type';
 import { getDetailedActivityAttributes, getSegmentEffortsForActivity, getSegments } from '../selector/detailedActivity';
 import moment = require('moment');
 
@@ -74,7 +74,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     const self = this;
 
     const segmentId = segmentEffort.id;
-    const segment: Segment = this.props.segmentsMap[segmentId];
+    // const segment: Segment = this.props.segmentsMap[segmentId];
+    const summarySegment: Segment = segmentEffort.segment;
+    const segment: DetailedSegment = this.props.segmentsMap[summarySegment.id];
     const speed = segmentEffort.distance / segmentEffort.movingTime;
 
     let averageGrade = '';
@@ -82,10 +84,10 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       averageGrade = segment.averageGrade.toFixed(1) + '%';
     }
 
-    // let totalElevationGain = '';
-    // if (segment && segment.totalElevationGain) {
-    //   totalElevationGain = Converters.metersToFeet(segment.totalElevationGain).toFixed(0) + 'ft';
-    // }
+    let totalElevationGain = '';
+    if (segment && segment.totalElevationGain) {
+      totalElevationGain = Converters.metersToFeet(segment.totalElevationGain).toFixed(0) + 'ft';
+    }
 
     // let effortsForSegmentLbl = 'none';
     // let recentEffortsLbl = 'none';

@@ -14,7 +14,7 @@ export interface DetailedActivityAttributesMap {
 }
 
 export interface SegmentsMap {
-  [id: string]: Segment; // segmentId
+  [id: string]: DetailedSegment; // segmentId
 }
 
 export interface SegmentEffortsMap {
