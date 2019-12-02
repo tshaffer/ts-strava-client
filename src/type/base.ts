@@ -21,6 +21,9 @@ export interface SegmentEffortsMap {
   [id: string]: SegmentEffort; // segmentEffortId
 }
 
+export interface EffortsForActivitySegments {
+  [id: string]: SegmentEffort[];
+}
 
 export interface Athlete {
   id: string;
