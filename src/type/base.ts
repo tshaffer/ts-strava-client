@@ -175,6 +175,7 @@ export interface DetailedActivityData {
   detailedSegments: DetailedSegment[];
   locationData: any[]; // array of 2 element arrays [lat, lng]?
   segmentEfforts: SegmentEffort[];
+  segmentEffortsInActivity: SegmentEffortWithSegment[];
   segments: Segment[];
 }
 

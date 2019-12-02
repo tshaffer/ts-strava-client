@@ -10,7 +10,7 @@ export const loadDetailedActivity = (activityId: number): any => {
     axios.get(path)
       .then((response) => {
         const detailedActivityData: DetailedActivityData = response.data as DetailedActivityData;
-        const { detailedActivityAttributes, detailedSegments, locationData, segmentEfforts, segments } = detailedActivityData;
+        const { detailedActivityAttributes, detailedSegments, locationData, segmentEfforts, segmentEffortsInActivity, segments } = detailedActivityData;
 
         // const detailedActivity: DetailedActivity = response.data as DetailedActivity;
 
@@ -44,6 +44,10 @@ export const loadDetailedActivity = (activityId: number): any => {
           dispatch(addSegmentEffort(segmentEffort.id, segmentEffort));
           // dispatch(addSegmentEffort(activityId, segmentEffort));
           // dispatch(addSegment(segmentEffort.segment.id, segmentEffort.segment));
+        }
+
+        for (const segmentEffortInActivity of segmentEffortsInActivity) {
+          dispatch(addSegmentEffort(segmentEffortInActivity.id, segmentEffortInActivity));
         }
 
         console.log('done');

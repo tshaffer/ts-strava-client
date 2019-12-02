@@ -10,13 +10,14 @@ import {
   loadDetailedActivity
 } from '../controller';
 import { DetailedActivity, SegmentEffortWithSegment, Segment, DetailedActivityAttributes, SegmentEffort, SegmentsMap, DetailedSegment } from '../type';
-import { getDetailedActivityAttributes, getSegmentEffortsForActivity, getSegments } from '../selector/detailedActivity';
+import { getDetailedActivityAttributes, getSegmentEffortsForActivity, getSegments, getSegmentEffortsInActivity } from '../selector/detailedActivity';
 import moment = require('moment');
 
 export interface DetailedActivityProps {
   params: any;
   detailedActivity: DetailedActivity;
   segmentEfforts: SegmentEffort[];
+  segmentEffortsInActivity: SegmentEffortWithSegment[];
   segmentsMap: SegmentsMap;
   onLoadDetailedActivity: (activityId: string) => any;
 }
@@ -189,9 +190,6 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
           }>Show all...</button>
         </td>
         <td>
-          {totalElevationGain}
-        </td>
-        <td>
           {averageGrade}
         </td>
     */
@@ -209,6 +207,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         </td>
         <td>
           {Converters.metersPerSecondToMilesPerHour(speed).toFixed(1)} mph
+        </td>
+        <td>
+          {totalElevationGain}
         </td>
       </tr>
     );
@@ -237,7 +238,6 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <th>Best Times</th>
               <th>Recent Efforts</th>
               <th>Average Grade</th>
-              <th>Elevation Gain</th>
               <th />
     */
     return (
@@ -250,6 +250,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <th>Time</th>
               <th>Distance</th>
               <th>Speed</th>
+              <th>Elevation Gain</th>
             </tr>
           </thead>
           <tbody>
@@ -294,6 +295,7 @@ function mapStateToProps(state: any, ownProps: any) {
     params: ownProps.params,
     detailedActivity: getDetailedActivityAttributes(state, parseInt(ownProps.params.id, 10)),
     segmentEfforts: getSegmentEffortsForActivity(state, parseInt(ownProps.params.id, 10)),
+    segmentEffortsInActivity: getSegmentEffortsInActivity(state, parseInt(ownProps.params.id, 10)),
     segmentsMap: getSegments(state),
   };
 }
