@@ -245,9 +245,6 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
           }
           }>Show all...</button>
         </td>
-        <td>
-          {averageGrade}
-        </td>
     */
 
     return (
@@ -269,6 +266,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         </td>
         <td>
           {Converters.metersPerSecondToMilesPerHour(speed).toFixed(1)} mph
+        </td>
+        <td>
+          {averageGrade}
         </td>
         <td>
           {totalElevationGain}
@@ -296,12 +296,6 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     const segmentEffortRows = this.buildSegmentEffortRows(this.props.segmentEfforts);
 
-    /*
-              <th>Best Times</th>
-              <th>Recent Efforts</th>
-              <th>Average Grade</th>
-              <th />
-    */
     return (
 
       <div id='DetailedActivity' className='detailsActivity'>
@@ -314,6 +308,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <th>Recent Efforts</th>
               <th>Distance</th>
               <th>Speed</th>
+              <th>Average Grade</th>
               <th>Elevation Gain</th>
             </tr>
           </thead>
