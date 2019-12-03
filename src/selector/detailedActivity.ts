@@ -35,19 +35,26 @@ export const getEffortsForActivitySegments = (state: StravaModelState, activityI
 
   const segmentEfforts: SegmentEffortsMap = state.segmentEfforts;
 
-  for (const segmentEffortId in state.segmentEfforts.segmentEffortsById) {
-    if (state.segmentEfforts.segmentEffortsById.hasOwnProperty(segmentEffortId)) {
+  console.log('effortsForActivitySegments');
+  console.log(state.segmentEfforts);
+
+  // tslint:disable-next-line: forin
+  for (const segmentEffortId in state.segmentEfforts) {
+    console.log(segmentEffortId);
+    if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
       const segmentEffort = segmentEfforts[segmentEffortId];
       const segmentId = segmentEffort.segment.id;
 
       if (isNil(effortsForActivitySegments[segmentId]) || isNil(effortsForActivitySegments.hasOwnProperty(segmentId))) {
         effortsForActivitySegments[segmentId] = [];
       }
-  
+
       const effortsForSegment = effortsForActivitySegments[segmentId];
       effortsForSegment.push(segmentEffort);
     }
   }
+
+  console.log(effortsForActivitySegments);
 
   return effortsForActivitySegments;
 };
