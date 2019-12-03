@@ -133,7 +133,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     const self = this;
 
-    const segmentId = segmentEffort.id;
+    // TEDTODO - id confusion
+    const segmentId = segmentEffort.segment.id;
     // const segment: Segment = this.props.segmentsMap[segmentId];
     const summarySegment: Segment = segmentEffort.segment;
     const segment: DetailedSegment = this.props.segmentsMap[summarySegment.id];
