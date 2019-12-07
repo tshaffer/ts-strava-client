@@ -21,8 +21,9 @@ export interface SegmentEffortsMap {
   [id: string]: StravatronSegmentEffort; // segmentEffortId
 }
 
-export interface EffortsForActivitySegments {
-  [id: string]: SegmentEffort[];
+// id is a segmentId
+export interface StravatronSegmentEffortsBySegment {
+  [id: string]: StravatronSegmentEffort[];
 }
 
 export interface Athlete {

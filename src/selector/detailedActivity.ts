@@ -1,6 +1,6 @@
 import { filter, isNil } from 'lodash';
 
-import { StravaModelState, DetailedActivityAttributes, SegmentEffortsMap, SegmentEffort, Activity, Segment, SegmentsMap, EffortsForActivitySegments, StravatronSegmentEffort } from '../type';
+import { StravaModelState, DetailedActivityAttributes, SegmentEffortsMap, SegmentEffort, Activity, Segment, SegmentsMap, StravatronSegmentEffort, StravatronSegmentEffortsBySegment, ActivitiesMap } from '../type';
 
 export const getDetailedActivityAttributes = (state: StravaModelState, activityId: number): DetailedActivityAttributes => {
   const activity: Activity = state.activities[activityId];
@@ -14,6 +14,7 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
 
   const segmentEfforts: StravatronSegmentEffort[] = [];
 
+  // TEDTODO - investigate to find a better way to do this. shouldn't need to add all then filter out desired ones.
   const segmentEffortsMap: SegmentEffortsMap = state.segmentEfforts;
   for (const segmentEffortId in segmentEffortsMap) {
     if (segmentEffortsMap.hasOwnProperty(segmentEffortId)) {
@@ -29,39 +30,35 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
   return segmentsInActivity;
 };
 
-export const getEffortsForActivitySegments = (state: StravaModelState, activityId: number): EffortsForActivitySegments => {
+// for each segment in the activity corresponding to the activityId, retrieve a list of segment efforts
+// return value should be a map
+//    index is segmentId
+//    value is array of segmentEfforts
+// first pass, possibly brute force approach
+//    initialize return object
+//    iterate through state.segmentEfforts
+//      if the activity id of the segment effort corresponds to the current activityId, add it to the map
+//        if there are no entries corresponding to thei segment, add an empty array to the map
+//        push segment effort onto array
+export const getEffortsForActivitySegments = (state: StravaModelState, activityId: number): StravatronSegmentEffortsBySegment => {
+  
+  const allSegmentEffortsForSegmentsInActivity: StravatronSegmentEffortsBySegment = {};
 
-  const effortsForActivitySegments: EffortsForActivitySegments = {};
-
-  // const segmentEfforts: SegmentEffortsMap = state.segmentEfforts;
-
-  // console.log('effortsForActivitySegments');
-  // console.log(state.segmentEfforts);
-
-  // // tslint:disable-next-line: forin
-  // for (const segmentEffortId in state.segmentEfforts) {
-  //   console.log(segmentEffortId);
-  //   if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
-  //     const segmentEffort = segmentEfforts[segmentEffortId];
-  //     const segmentId = segmentEffort.segment.id;
-
-  //     if (isNil(effortsForActivitySegments[segmentId]) || isNil(effortsForActivitySegments.hasOwnProperty(segmentId))) {
-  //       effortsForActivitySegments[segmentId] = [];
-  //     }
-
-  //     const effortsForSegment = effortsForActivitySegments[segmentId];
-  //     effortsForSegment.push(segmentEffort);
-  //   }
-  // }
-
-  // console.log(effortsForActivitySegments);
-
-  return effortsForActivitySegments;
+  for (const segmentEffortId in state.segmentEfforts) {
+    if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
+      const segmentEffort: StravatronSegmentEffort = state.segmentEfforts[segmentEffortId];
+      const segmentId = segmentEffort.segment.id;
+      if (segmentEffort.activityId === activityId) {
+        if (!allSegmentEffortsForSegmentsInActivity.hasOwnProperty(segmentId)) {
+          allSegmentEffortsForSegmentsInActivity[segmentId] = [];
+        }
+        allSegmentEffortsForSegmentsInActivity[segmentId].push(segmentEffort);
+      }
+    }
+  }
+  
+  return allSegmentEffortsForSegmentsInActivity;
 };
-
-// export const getSegment = (state: StravaModelState, segmentId: number): Segment => {
-//   return state.segments[segmentId];
-// };
 
 export const getSegments = (state: StravaModelState): SegmentsMap => {
   return state.segments;
