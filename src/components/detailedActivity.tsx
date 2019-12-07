@@ -30,6 +30,7 @@ import {
   getEffortsForActivitySegments
 } from '../selector/detailedActivity';
 import moment = require('moment');
+import { AvRecentActors } from 'material-ui/svg-icons';
 
 export interface DetailedActivityProps {
   params: any;
@@ -47,7 +48,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     this.props.onLoadDetailedActivity(this.props.params.id);
   }
 
-  buildRideSummaryHeader(detailedActivity: DetailedActivity) {
+  buildRideSummaryHeader(detailedActivity: StravatronDetailedActivity) {
 
     if (isNil(detailedActivity)) {
       return <div>Loading</div>;
@@ -133,6 +134,101 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
   }
 
 
+  buildRecentEfforts(segmentId: number): any {
+
+    // let recentEffortsLbl: any;
+    // let effortsForSegmentLbl: any;
+
+    // if (!isNil(this.props.effortsForSegments)) {
+    //   const effortsForSegment: StravatronSegmentEffort[] = this.props.effortsForSegments[segmentId];
+    //   if (!isNil(effortsForSegment)) {
+    //     if (effortsForSegment.length > 0) {
+
+    //       const effortData = this.analyzeEffortsForSegment(effortsForSegment);
+
+    //       const bestEffortTime = moment().startOf('day')
+    //         .seconds(Number(effortData.effortsSortedByMovingTime[0].movingTime))
+    //         .format('mm:ss');
+
+    //       const bestEffortDate = moment(effortData.effortsSortedByMovingTime[0].startDateLocal).format('YYYY-MM-DD');
+
+    //       effortsForSegmentLbl =
+    //         (
+    //           <span>
+    //             <span>{bestEffortTime}</span>
+    //             <span className='smallDimDate'>{bestEffortDate}</span>
+    //           </span>
+    //         );
+
+    //       if (!isNil(effortData.effortsSortedByMovingTime[1])) {
+
+    //         const nextBestEffortTime = moment().startOf('day')
+    //           .seconds(Number(effortData.effortsSortedByMovingTime[1].movingTime))
+    //           .format('mm:ss');
+    //         const nextBestEffortDate =
+    //           moment(effortData.effortsSortedByMovingTime[1].startDateLocal).format('YYYY-MM-DD');
+
+    //         effortsForSegmentLbl =
+    //           (
+    //             <span>
+    //               <span>{bestEffortTime}</span>
+    //               <span className='smallDimDate'>{bestEffortDate}</span>
+    //               <span>, {nextBestEffortTime}</span>
+    //               <span className='smallDimDate'>{nextBestEffortDate}</span>
+    //             </span>
+    //           );
+    //       }
+
+    //       // effortsSortedByDate
+    //       const recentEfforts = [];
+    //       const recentEffort =
+    //       {
+    //         movingTime: '',
+    //         date: '',
+    //         separator: ''
+    //       };
+
+    //       recentEfforts.push(recentEffort);
+    //       recentEfforts.push(recentEffort);
+    //       recentEfforts.push(recentEffort);
+
+    //       let index = 0;
+    //       while (index < 3) {
+    //         if (effortData.effortsSortedByDate.length > (index + 1)) {
+    //           const effort = effortData.effortsSortedByDate[index + 1];
+    //           recentEfforts[index] =
+    //           {
+    //             movingTime: effort.movingTime,
+    //             date: effort.startDateLocal,
+    //             separator: ', '
+    //           };
+    //         }
+    //         index++;
+    //       }
+
+    //       recentEffortsLbl =
+    //       (
+    //         <span>
+    //           <span>{Converters.elapsedTimeToTimeString(recentEfforts[0].movingTime)}</span>
+    //           <span className='smallDimDate'>{Converters.formatDate(recentEfforts[0].date)}</span>
+    //           <span>{recentEfforts[1].separator}</span>
+    //           <span>{Converters.elapsedTimeToTimeString(recentEfforts[1].movingTime)}</span>
+    //           <span className='smallDimDate'>{Converters.formatDate(recentEfforts[1].date)}</span>
+    //           <span>{recentEfforts[2].separator}</span>
+    //           <span>{Converters.elapsedTimeToTimeString(recentEfforts[2].movingTime)}</span>
+    //           <span className='smallDimDate'>{Converters.formatDate(recentEfforts[2].date)}</span>
+    //         </span>
+    //       );
+    //     }
+    //   }
+    // }
+
+    const recentEffortsLbl: any = null;
+    const effortsForSegmentLbl: any = null;
+
+    return { recentEffortsLbl, effortsForSegmentLbl };
+  }
+
   buildSegmentEffortRow(segmentEffort: StravatronSegmentEffort) {
 
     const self = this;
@@ -154,94 +250,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       totalElevationGain = Converters.metersToFeet(segment.totalElevationGain).toFixed(0) + 'ft';
     }
 
-    let effortsForSegmentLbl;
-    let recentEffortsLbl;
-    if (!isNil(this.props.effortsForSegments)) {
-      const effortsForSegment: StravatronSegmentEffort[] = this.props.effortsForSegments[segmentId];
-      if (!isNil(effortsForSegment)) {
-        if (effortsForSegment.length > 0) {
-
-          const effortData = this.analyzeEffortsForSegment(effortsForSegment);
-
-          const bestEffortTime = moment().startOf('day')
-            .seconds(Number(effortData.effortsSortedByMovingTime[0].movingTime))
-            .format('mm:ss');
-
-          const bestEffortDate = moment(effortData.effortsSortedByMovingTime[0].startDateLocal).format('YYYY-MM-DD');
-
-          effortsForSegmentLbl =
-            (
-              <span>
-                <span>{bestEffortTime}</span>
-                <span className='smallDimDate'>{bestEffortDate}</span>
-              </span>
-            );
-
-          if (!isNil(effortData.effortsSortedByMovingTime[1])) {
-
-            const nextBestEffortTime = moment().startOf('day')
-              .seconds(Number(effortData.effortsSortedByMovingTime[1].movingTime))
-              .format('mm:ss');
-            const nextBestEffortDate =
-              moment(effortData.effortsSortedByMovingTime[1].startDateLocal).format('YYYY-MM-DD');
-
-            effortsForSegmentLbl =
-              (
-                <span>
-                  <span>{bestEffortTime}</span>
-                  <span className='smallDimDate'>{bestEffortDate}</span>
-                  <span>, {nextBestEffortTime}</span>
-                  <span className='smallDimDate'>{nextBestEffortDate}</span>
-                </span>
-              );
-          }
-
-          // effortsSortedByDate
-          const recentEfforts = [];
-          const recentEffort =
-          {
-            movingTime: '',
-            date: '',
-            separator: ''
-          };
-
-          recentEfforts.push(recentEffort);
-          recentEfforts.push(recentEffort);
-          recentEfforts.push(recentEffort);
-
-          let index = 0;
-          while (index < 3) {
-            if (effortData.effortsSortedByDate.length > (index + 1)) {
-              const effort = effortData.effortsSortedByDate[index + 1];
-              recentEfforts[index] =
-              {
-                movingTime: effort.movingTime,
-                date: effort.startDateLocal,
-                separator: ', '
-              };
-            }
-            index++;
-          }
-
-          recentEffortsLbl =
-          (
-            <span>
-              <span>{Converters.elapsedTimeToTimeString(recentEfforts[0].movingTime)}</span>
-              <span className='smallDimDate'>{Converters.formatDate(recentEfforts[0].date)}</span>
-              <span>{recentEfforts[1].separator}</span>
-              <span>{Converters.elapsedTimeToTimeString(recentEfforts[1].movingTime)}</span>
-              <span className='smallDimDate'>{Converters.formatDate(recentEfforts[1].date)}</span>
-              <span>{recentEfforts[2].separator}</span>
-              <span>{Converters.elapsedTimeToTimeString(recentEfforts[2].movingTime)}</span>
-              <span className='smallDimDate'>{Converters.formatDate(recentEfforts[2].date)}</span>
-            </span>
-          );
-
-
-        }
-      }
-    }
-
+    const effortsData = this.buildRecentEfforts(segmentId);
+    const { recentEffortsLbl, effortsForSegmentLbl } = effortsData;
     /*
         <td>
           <button onClick={() => {
@@ -282,7 +292,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
   }
 
 
-  buildSegmentEffortRows(segmentEfforts: SegmentEffort[]) {
+  buildSegmentEffortRows(segmentEfforts: StravatronSegmentEffort[]) {
 
     const self = this;
 
