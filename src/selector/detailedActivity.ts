@@ -23,11 +23,11 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
     }
   }
 
-  const segmentsInActivity: StravatronSegmentEffort[] = filter(segmentEfforts, (segmentEffort) => {
+  const segmentEffortsInActivity: StravatronSegmentEffort[] = filter(segmentEfforts, (segmentEffort) => {
     return segmentEffort.activityId === activityId;
   });
 
-  return segmentsInActivity;
+  return segmentEffortsInActivity;
 };
 
 // for each segment in the activity corresponding to the activityId, retrieve a list of segment efforts
@@ -37,18 +37,33 @@ export const getSegmentEffortsForActivity = (state: StravaModelState, activityId
 // first pass, possibly brute force approach
 //    initialize return object
 //    iterate through state.segmentEfforts
+//      if the activity id of the segment effort corresponds to the current activityId, add the correponding segment
+//        to the list of segment ids in the activity (TEDTODO - separate selector?)
+
 //      if the activity id of the segment effort corresponds to the current activityId, add it to the map
 //        if there are no entries corresponding to thei segment, add an empty array to the map
 //        push segment effort onto array
 export const getEffortsForActivitySegments = (state: StravaModelState, activityId: number): StravatronSegmentEffortsBySegment => {
-  
+
   const allSegmentEffortsForSegmentsInActivity: StravatronSegmentEffortsBySegment = {};
 
+  // get segments in activity
+  const segmentsInActivity: any = {};
   for (const segmentEffortId in state.segmentEfforts) {
     if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
       const segmentEffort: StravatronSegmentEffort = state.segmentEfforts[segmentEffortId];
       const segmentId = segmentEffort.segment.id;
       if (segmentEffort.activityId === activityId) {
+        segmentsInActivity[segmentId] = true;
+      }
+    }
+  }
+
+  for (const segmentEffortId in state.segmentEfforts) {
+    if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
+      const segmentEffort: StravatronSegmentEffort = state.segmentEfforts[segmentEffortId];
+      const segmentId = segmentEffort.segment.id;
+      if (segmentsInActivity.hasOwnProperty(segmentId)) {
         if (!allSegmentEffortsForSegmentsInActivity.hasOwnProperty(segmentId)) {
           allSegmentEffortsForSegmentsInActivity[segmentId] = [];
         }
@@ -56,7 +71,7 @@ export const getEffortsForActivitySegments = (state: StravaModelState, activityI
       }
     }
   }
-  
+
   return allSegmentEffortsForSegmentsInActivity;
 };
 
