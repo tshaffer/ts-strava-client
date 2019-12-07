@@ -12,21 +12,20 @@ export const getDetailedActivityAttributes = (state: StravaModelState, activityI
 // https://lodash.com/docs/4.17.15#filter
 export const getSegmentEffortsForActivity = (state: StravaModelState, activityId: number): StravatronSegmentEffort[] => {
 
-  // const segmentEfforts: SegmentEffort[] = [];
+  const segmentEfforts: StravatronSegmentEffort[] = [];
 
-  // const segmentEffortsMap: SegmentEffortsMap = state.segmentEfforts;
-  // for (const segmentEffortId in segmentEffortsMap) {
-  //   if (segmentEffortsMap.hasOwnProperty(segmentEffortId)) {
-  //     const segmentEffort: SegmentEffort = segmentEffortsMap[segmentEffortId];
-  //     segmentEfforts.push(segmentEffort);
-  //   }
-  // }
+  const segmentEffortsMap: SegmentEffortsMap = state.segmentEfforts;
+  for (const segmentEffortId in segmentEffortsMap) {
+    if (segmentEffortsMap.hasOwnProperty(segmentEffortId)) {
+      const segmentEffort: StravatronSegmentEffort = segmentEffortsMap[segmentEffortId];
+      segmentEfforts.push(segmentEffort);
+    }
+  }
 
-  // const segmentsInActivity = filter(segmentEfforts, (segmentEffort) => {
-  //   return segmentEffort.activityId === activityId;
-  // });
+  const segmentsInActivity: StravatronSegmentEffort[] = filter(segmentEfforts, (segmentEffort) => {
+    return segmentEffort.activityId === activityId;
+  });
 
-  const segmentsInActivity: StravatronSegmentEffort[] = [];
   return segmentsInActivity;
 };
 
