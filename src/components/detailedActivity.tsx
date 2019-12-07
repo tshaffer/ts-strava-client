@@ -17,7 +17,11 @@ import {
   SegmentEffort,
   SegmentsMap,
   DetailedSegment,
-  EffortsForActivitySegments
+  EffortsForActivitySegments,
+  StravatronDetailedActivity,
+  StravatronSegmentEffort,
+  StravatronSummarySegment,
+  StravatronDetailedSegment
 } from '../type';
 import {
   getDetailedActivityAttributes,
@@ -29,9 +33,9 @@ import moment = require('moment');
 
 export interface DetailedActivityProps {
   params: any;
-  detailedActivity: DetailedActivity;
-  segmentEfforts: SegmentEffort[];
-  effortsForSegments: EffortsForActivitySegments;
+  detailedActivity: StravatronDetailedActivity;
+  segmentEfforts: StravatronSegmentEffort[];
+  effortsForSegments: StravatronSegmentEffort[];
   segmentsMap: SegmentsMap;
   onLoadDetailedActivity: (activityId: string) => any;
 }
@@ -129,15 +133,15 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
   }
 
 
-  buildSegmentEffortRow(segmentEffort: SegmentEffort) {
+  buildSegmentEffortRow(segmentEffort: StravatronSegmentEffort) {
 
     const self = this;
 
     // TEDTODO - id confusion
     const segmentId = segmentEffort.segment.id;
     // const segment: Segment = this.props.segmentsMap[segmentId];
-    const summarySegment: Segment = segmentEffort.segment;
-    const segment: DetailedSegment = this.props.segmentsMap[summarySegment.id];
+    const summarySegment: StravatronSummarySegment = segmentEffort.segment;
+    const segment: StravatronDetailedSegment = this.props.segmentsMap[summarySegment.id];
     const speed = segmentEffort.distance / segmentEffort.movingTime;
 
     let averageGrade = '';
@@ -153,7 +157,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     let effortsForSegmentLbl;
     let recentEffortsLbl;
     if (!isNil(this.props.effortsForSegments)) {
-      const effortsForSegment: SegmentEffort[] = this.props.effortsForSegments[segmentId];
+      const effortsForSegment: StravatronSegmentEffort[] = this.props.effortsForSegments[segmentId];
       if (!isNil(effortsForSegment)) {
         if (effortsForSegment.length > 0) {
 

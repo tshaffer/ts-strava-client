@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { SegmentsMap, DetailedSegment } from '../type';
+import { SegmentsMap, DetailedSegment, StravatronDetailedSegment } from '../type';
 import { StravaModelBaseAction, SegmentAction } from './baseAction';
 
 // ------------------------------------
@@ -15,12 +15,12 @@ export type PartialSegmentDescription = Partial<DetailedSegment>;
 
 export interface AddSegmentPayload {
   segmentId: number;
-  segment: DetailedSegment;
+  segment: StravatronDetailedSegment;
 }
 
 export const addSegment = (
   segmentId: number,
-  segment: DetailedSegment
+  segment: StravatronDetailedSegment
 ): SegmentAction<AddSegmentPayload> => {
 
   return {
