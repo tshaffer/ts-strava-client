@@ -1,10 +1,18 @@
 import { filter, isNil } from 'lodash';
 
-import { StravaModelState, DetailedActivityAttributes, SegmentEffortsMap, SegmentEffort, Activity, Segment, SegmentsMap, StravatronSegmentEffort, StravatronSegmentEffortsBySegment, ActivitiesMap } from '../type';
+import { 
+  StravaModelState, 
+  StravatronDetailedActivityAttributes, 
+  SegmentEffortsMap, 
+  StravatronSummaryActivity, 
+  SegmentsMap, 
+  StravatronSegmentEffort, 
+  StravatronSegmentEffortsBySegment, 
+} from '../type';
 
-export const getDetailedActivityAttributes = (state: StravaModelState, activityId: number): DetailedActivityAttributes => {
-  const activity: Activity = state.activities[activityId];
-  const detailedActivity: DetailedActivityAttributes = state.detailedActivities[activityId];
+export const getStravatronDetailedActivityAttributes = (state: StravaModelState, activityId: number): StravatronDetailedActivityAttributes => {
+  const activity: StravatronSummaryActivity = state.activities[activityId];
+  const detailedActivity: StravatronDetailedActivityAttributes = state.detailedActivities[activityId];
   const fullActivity = Object.assign({}, activity, detailedActivity);
   return fullActivity;
 };
@@ -52,7 +60,7 @@ export const getEffortsForActivitySegments = (state: StravaModelState, activityI
   for (const segmentEffortId in state.segmentEfforts) {
     if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
       const segmentEffort: StravatronSegmentEffort = state.segmentEfforts[segmentEffortId];
-      const segmentId = segmentEffort.segment.id;
+      const segmentId = segmentEffort.segmentId;
       if (segmentEffort.activityId === activityId) {
         segmentsInActivity[segmentId] = true;
       }
@@ -62,7 +70,7 @@ export const getEffortsForActivitySegments = (state: StravaModelState, activityI
   for (const segmentEffortId in state.segmentEfforts) {
     if (state.segmentEfforts.hasOwnProperty(segmentEffortId)) {
       const segmentEffort: StravatronSegmentEffort = state.segmentEfforts[segmentEffortId];
-      const segmentId = segmentEffort.segment.id;
+      const segmentId = segmentEffort.segmentId;
       if (segmentsInActivity.hasOwnProperty(segmentId)) {
         if (!allSegmentEffortsForSegmentsInActivity.hasOwnProperty(segmentId)) {
           allSegmentEffortsForSegmentsInActivity[segmentId] = [];

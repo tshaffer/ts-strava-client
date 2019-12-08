@@ -1,5 +1,9 @@
 import { cloneDeep } from 'lodash';
-import { DetailedActivity, DetailedActivityAttributesMap, DetailedActivityAttributes, SegmentEffort, Segment, StravatronDetailedActivityAttributes } from '../type';
+import { 
+  StravatronDetailedActivity, 
+  DetailedActivityAttributesMap, 
+  StravatronDetailedActivityAttributes
+ } from '../type';
 import { StravaModelBaseAction, DetailedActivityAction } from './baseAction';
 
 // ------------------------------------
@@ -12,11 +16,11 @@ export const ADD_DETAILED_ACTIVITY_ATTRIBUTES = 'ADD_DETAILED_ACTIVITY_ATTRIBUTE
 // Actions
 // ------------------------------------
 
-export type PartialDetailedActivityDescription = Partial<DetailedActivity>;
+export type PartialDetailedActivityDescription = Partial<StravatronDetailedActivity>;
 
 export interface AddDetailedActivityAttributesPayload {
   activityId: string;
-  detailedActivityAttributes: DetailedActivityAttributes;
+  detailedActivityAttributes: StravatronDetailedActivityAttributes;
 }
 
 export const addDetailedActivityAttributes = (

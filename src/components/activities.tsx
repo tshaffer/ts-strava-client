@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { ActivitiesMap, Activity } from '../type';
+import { ActivitiesMap, StravatronSummaryActivity } from '../type';
 import { getActivities } from '../selector';
 
 import * as Converters from '../utilities/converters';
@@ -27,7 +27,7 @@ class Activities extends React.Component<ActivitiesProps> {
     hashHistory.push('/detailedActivity/' + activityId.toString());
   }
 
-  buildSummaryActivityRow(activity: Activity): any {
+  buildSummaryActivityRow(activity: StravatronSummaryActivity): any {
 
     const self = this;
 
@@ -68,7 +68,7 @@ class Activities extends React.Component<ActivitiesProps> {
 
   buildActivityRows(): any[] {
 
-    const activities: Activity[] = [];
+    const activities: StravatronSummaryActivity[] = [];
 
     const activitiesLUT = this.props.activities;
 

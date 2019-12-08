@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { Activity, ActivitiesMap } from '../type';
+import { StravatronSummaryActivity, ActivitiesMap } from '../type';
 import { StravaModelBaseAction, ActivityAction } from './baseAction';
 
 // ------------------------------------
@@ -11,16 +11,16 @@ export const ADD_ACTIVITY = 'ADD_ACTIVITY';
 // Actions
 // ------------------------------------
 
-export type PartialActivityDescription = Partial<Activity>;
+export type PartialActivityDescription = Partial<StravatronSummaryActivity>;
 
 export interface AddActivityPayload {
   activityId: string;
-  activity: Activity;
+  activity: StravatronSummaryActivity;
 }
 
 export const addActivity = (
   activityId: string,
-  activity: Activity
+  activity: StravatronSummaryActivity
 ): ActivityAction<AddActivityPayload> => {
 
   return {

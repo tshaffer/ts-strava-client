@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addActivity } from '../model/activity';
-import { Activity } from '../type';
+import { StravatronSummaryActivity } from '../type';
 
 const serverUrl = 'http://localhost:8000';
 
@@ -9,7 +9,7 @@ export const loadSummaryActivities = (): any => {
     const path = serverUrl + '/getActivities';
     axios.get(path)
       .then((response) => {
-        const summaryActivities: Activity[] = response.data as Activity[];
+        const summaryActivities: StravatronSummaryActivity[] = response.data as StravatronSummaryActivity[];
         console.log(summaryActivities);
 
         for (const activity of summaryActivities) {

@@ -1,5 +1,5 @@
 import { cloneDeep } from 'lodash';
-import { SegmentEffort, SegmentEffortsMap, StravatronSegmentEffort } from '../type';
+import { SegmentEffortsMap, StravatronSegmentEffort } from '../type';
 import { StravaModelBaseAction, SegmentEffortAction } from './baseAction';
 
 // ------------------------------------
@@ -11,7 +11,7 @@ export const ADD_SEGMENT_EFFORT = 'ADD_SEGMENT_EFFORT';
 // Actions
 // ------------------------------------
 
-export type PartialSegmentEffortDescription = Partial<SegmentEffort>;
+export type PartialSegmentEffortDescription = Partial<StravatronSegmentEffort>;
 
 export interface AddSegmentEffortPayload {
   segmentEffortId: number;

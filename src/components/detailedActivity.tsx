@@ -10,31 +10,23 @@ import {
   loadDetailedActivity
 } from '../controller';
 import {
-  DetailedActivity,
-  SegmentEffortWithSegment,
-  Segment,
-  DetailedActivityAttributes,
-  SegmentEffort,
+  StravatronDetailedActivityAttributes,
   SegmentsMap,
-  DetailedSegment,
+  StravatronDetailedSegment,
   StravatronSegmentEffortsBySegment,
-  StravatronDetailedActivity,
   StravatronSegmentEffort,
-  StravatronSummarySegment,
-  StravatronDetailedSegment
 } from '../type';
 import {
-  getDetailedActivityAttributes,
+  getStravatronDetailedActivityAttributes,
   getSegmentEffortsForActivity,
   getSegments,
   getEffortsForActivitySegments
 } from '../selector/detailedActivity';
 import moment = require('moment');
-import { AvRecentActors } from 'material-ui/svg-icons';
 
 export interface DetailedActivityProps {
   params: any;
-  detailedActivity: StravatronDetailedActivity;
+  detailedActivity: StravatronDetailedActivityAttributes;
   segmentEfforts: StravatronSegmentEffort[];
   effortsForSegments: StravatronSegmentEffortsBySegment;
   segmentsMap: SegmentsMap;
@@ -48,7 +40,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     this.props.onLoadDetailedActivity(this.props.params.id);
   }
 
-  buildRideSummaryHeader(detailedActivity: StravatronDetailedActivity) {
+  buildRideSummaryHeader(detailedActivity: StravatronDetailedActivityAttributes) {
 
     if (isNil(detailedActivity)) {
       return <div>Loading</div>;
@@ -227,10 +219,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     const self = this;
 
     // TEDTODO - id confusion
-    const segmentId = segmentEffort.segment.id;
+    const segmentId = segmentEffort.segmentId;
     // const segment: Segment = this.props.segmentsMap[segmentId];
-    const summarySegment: StravatronSummarySegment = segmentEffort.segment;
-    const segment: StravatronDetailedSegment = this.props.segmentsMap[summarySegment.id];
+    const segment: StravatronDetailedSegment = this.props.segmentsMap[segmentId];
     const speed = segmentEffort.distance / segmentEffort.movingTime;
 
     let averageGrade = '';
@@ -355,7 +346,7 @@ function mapStateToProps(state: any, ownProps: any) {
 
   return {
     params: ownProps.params,
-    detailedActivity: getDetailedActivityAttributes(state, parseInt(ownProps.params.id, 10)),
+    detailedActivity: getStravatronDetailedActivityAttributes(state, parseInt(ownProps.params.id, 10)),
     segmentEfforts: getSegmentEffortsForActivity(state, parseInt(ownProps.params.id, 10)),
     effortsForSegments: getEffortsForActivitySegments(state, parseInt(ownProps.params.id, 10)),
     segmentsMap: getSegments(state),
