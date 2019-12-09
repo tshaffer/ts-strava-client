@@ -3,6 +3,7 @@ export interface StravaModelState {
   detailedActivities: DetailedActivityAttributesMap;
   segments: SegmentsMap;
   segmentEfforts: SegmentEffortsMap;
+  streams: StravatronStreams;
 }
 
 export interface ActivitiesMap {
@@ -35,15 +36,47 @@ export interface StravatronDetailedActivityData {
 }
 
 export interface StravatronDetailedActivityAttributes {
-  name: string;
-  distance: number;
-  movingTime: number;
+  achievementCount: number;
+  athleteId: number;
   averageSpeed: number;
-  calories: number;
+  averageTemp?: number;
+  averageWatts: number;
+  deviceWatts?: boolean;
+  distance: number;
+  elapsedTime: number;
+  elevHigh?: number;
+  elevLow?: number;
+  endLatlng: StravaNativeLatLng;
+  id: number;
   kilojoules: number;
-  totalElevationGain: number;
+  city?: string;
+  country: string;
+  state?: string;
+  map: StravaNativePolylineMap; // does not include polyline
+  maxSpeed: number;
+  movingTime: number;
+  name: string;
+  prCount: number;
+  resourceState: number;
+  startDate: Date;
   startDateLocal: Date;
-  map: StravaNativePolylineMap;
+  startLatitude: number;
+  startLatlng: StravaNativeLatLng;
+  startLongitude: number;
+  timezone: string;
+  totalElevationGain: number;
+  weightedAverageWatts?: number;
+  description: string;
+  calories: number;
+  averageCadence: number;
+  averageHeartrate: number;
+  deviceName: string;
+  hasHeartrate: boolean;
+  maxHeartrate: number;
+  maxWatts: number;
+  type: string;
+  utcOffset: number;
+  bestEfforts?: any; // DetailedSegmentEffort or DetailedSegmentEffort[] ??
 }
 
 export interface StravatronAthlete {

@@ -29,3 +29,7 @@ export interface SegmentAction<T> extends StravaBaseAction {
   payload: T;
 }
 
+export interface StreamsAction<T> extends StravaBaseAction {
+  payload: T;
+}
+

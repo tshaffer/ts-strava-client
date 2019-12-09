@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { addDetailedActivityAttributes, addSegment, addSegmentEffort } from '../model';
+import { addDetailedActivityAttributes, addSegment, addSegmentEffort, addStreams } from '../model';
 import { 
   StravatronDetailedActivityData 
 } from '../type';
@@ -14,7 +14,7 @@ export const loadDetailedActivity = (activityId: number): any => {
 
         const detailedActivityData: StravatronDetailedActivityData = response.data as StravatronDetailedActivityData;
 
-        const { detailedActivityAttributes, segments, allSegmentEffortsForSegmentsInActivity } = detailedActivityData;
+        const { detailedActivityAttributes, segments, allSegmentEffortsForSegmentsInActivity, streams } = detailedActivityData;
       
         dispatch(addDetailedActivityAttributes(activityId, detailedActivityAttributes));
 
@@ -25,6 +25,8 @@ export const loadDetailedActivity = (activityId: number): any => {
         for (const segmentEffortInActivity of allSegmentEffortsForSegmentsInActivity) {
           dispatch(addSegmentEffort(segmentEffortInActivity.id, segmentEffortInActivity));
         }
+
+        dispatch(addStreams(streams));
 
         console.log('done');
         return;
