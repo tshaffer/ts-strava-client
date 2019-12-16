@@ -3,10 +3,11 @@ import { addActivity } from '../model/activity';
 import { StravatronSummaryActivity } from '../type';
 
 const serverUrl = 'http://localhost:8000';
+const apiUrlFragment = '/api/v1/';
 
 export const loadSummaryActivities = (): any => {
   return (dispatch: any, getState: any): any => {
-    const path = serverUrl + '/getActivities';
+    const path = serverUrl + apiUrlFragment + '/activities';
     axios.get(path)
       .then((response) => {
         const summaryActivities: StravatronSummaryActivity[] = response.data as StravatronSummaryActivity[];
