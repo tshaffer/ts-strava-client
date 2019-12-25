@@ -52,6 +52,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       calories = detailedActivity.kilojoules.toFixed(0);
     }
 
+    const averageWatts = isNil(detailedActivity.averageWatts) ? 0 : detailedActivity.averageWatts;
+
     return (
       <div id='RideSummary'>
         <table className='summaryTable'>
@@ -63,8 +65,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <td>{Converters.getMovingTime(detailedActivity.movingTime)}</td>
               <td>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</td>
               <td>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</td>
-              <td>{Converters.metersPerSecondToMilesPerHour(detailedActivity.averageSpeed).toFixed(1)} mph</td>
               <td>{calories}</td>
+              <td>{averageWatts}</td>
+              <td>{detailedActivity.maxWatts}</td>
+              <td>{detailedActivity.averageHeartrate}</td>
+              <td>{detailedActivity.maxHeartrate}</td>
             </tr>
 
             <tr className='summaryLabels'>
@@ -72,8 +77,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <td>Time</td>
               <td>Elevation</td>
               <td>Distance</td>
-              <td>Speed</td>
               <td>Calories</td>
+              <td>Average Watts</td>
+              <td>Max Watts</td>
+              <td>Average Heart Rate</td>
+              <td>Max Heart Rate</td>
             </tr>
 
           </tbody>
@@ -337,7 +345,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     return (
       <div>
         <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
-        <br/>
+        <br />
         {rideSummaryHeader}
         {segmentEffortsTable}
       </div>
