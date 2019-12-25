@@ -1,3 +1,5 @@
+import { isNil } from 'lodash';
+
 import * as React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -36,6 +38,8 @@ class Activities extends React.Component<ActivitiesProps> {
       calories = activity.kilojoules.toFixed(0);
     }
 
+    const averageWatts = isNil(activity.averageWatts) ? 0 : activity.averageWatts;
+
     return (
       <tr key={activity.id}>
         <td>
@@ -54,10 +58,19 @@ class Activities extends React.Component<ActivitiesProps> {
           {Converters.metersToFeet(activity.totalElevationGain).toFixed(0)} ft
         </td>
         <td>
-          {Converters.metersPerSecondToMilesPerHour(activity.averageSpeed).toFixed(1)} mph
+          {calories}
         </td>
         <td>
-          {calories}
+          {averageWatts}
+        </td>
+        <td>
+          {activity.maxWatts}
+        </td>
+        <td>
+          {activity.averageHeartrate}
+        </td>
+        <td>
+          {activity.maxHeartrate}
         </td>
         <td>
           <button onClick={() => self.handleShowDetailedMap(activity.id)}>Show details</button>
@@ -120,8 +133,11 @@ class Activities extends React.Component<ActivitiesProps> {
                 <th>Riding Time</th>
                 <th>Distance</th>
                 <th>Elevation</th>
-                <th>Average Speed</th>
                 <th>Calories</th>
+                <th>Average Watts</th>
+                <th>Max Watts</th>
+                <th>Average Heartrate</th>
+                <th>Max Heartrate</th>
                 <th/>
               </tr>
             </thead>
