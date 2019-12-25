@@ -26,57 +26,34 @@ export interface StravatronSegmentEffortsBySegment {
   [id: string]: StravatronSegmentEffort[]; // segmentId
 }
 
+export interface StravatronStreams {
+  time: any[];
+  location: any[];
+  elevation: any[];
+  distance: any[];
+  gradient: any[];
+  cadence: any[];
+  heartrate: any[];
+  watts: any[];
+}
+
+export interface StravaNativeLatLng {
+  latlng: number[];
+}
+
+export interface StravaNativePolylineMap {
+  id: string;
+  polyline: string;
+  summary_polyline: string;
+}
+
 export type StravatronSegmentEffortsForSegment = StravatronSegmentEffort[];
 
 export interface StravatronDetailedActivityData {
   detailedActivityAttributes: StravatronDetailedActivityAttributes;
   allSegmentEffortsForSegmentsInActivity: StravatronSegmentEffort[];
-  streams: StravatronStreams;
+  streams: StravatronActivityStreams;
   segments: StravatronDetailedSegment[];
-}
-
-export interface StravatronDetailedActivityAttributes {
-  achievementCount: number;
-  athleteId: number;
-  averageSpeed: number;
-  averageTemp?: number;
-  averageWatts: number;
-  deviceWatts?: boolean;
-  distance: number;
-  elapsedTime: number;
-  elevHigh?: number;
-  elevLow?: number;
-  endLatlng: StravaNativeLatLng;
-  id: number;
-  kilojoules: number;
-  city?: string;
-  country: string;
-  state?: string;
-  map: StravaNativePolylineMap; // does not include polyline
-  maxSpeed: number;
-  movingTime: number;
-  name: string;
-  prCount: number;
-  resourceState: number;
-  startDate: Date;
-  startDateLocal: Date;
-  startLatitude: number;
-  startLatlng: StravaNativeLatLng;
-  startLongitude: number;
-  timezone: string;
-  totalElevationGain: number;
-  weightedAverageWatts?: number;
-  description: string;
-  calories: number;
-  averageCadence: number;
-  averageHeartrate: number;
-  deviceName: string;
-  hasHeartrate: boolean;
-  maxHeartrate: number;
-  maxWatts: number;
-  type: string;
-  utcOffset: number;
-  bestEfforts?: any; // DetailedSegmentEffort or DetailedSegmentEffort[] ??
 }
 
 export interface StravatronAthlete {
@@ -103,10 +80,11 @@ export interface StravatronDetailedSegment {
   totalElevationGain: number;
   map: StravaNativePolylineMap;
   effortCount: number;
+  allEffortsLoaded: boolean;
 }
 
 export interface StravatronAchievement {
-  type: string;
+  achievementType: string;
   rank: number;
   typeId: number;
 }
@@ -120,7 +98,7 @@ export interface StravatronSegmentEffort {
   movingTime: number;
   startDateLocal: Date;
   distance: number;
-  averageWatts: number;
+  averageWatts?: number;
   prRank: number;
   achievements: StravatronAchievement[];
   averageCadence: number;
@@ -139,7 +117,8 @@ export interface StravatronStream {
   type: string;
 }
 
-export interface StravatronStreams {
+export interface StravatronActivityStreams {
+  activityId: number;
   time: any[];
   location: any[];
   elevation: any[];
@@ -153,21 +132,25 @@ export interface StravatronStreams {
 export interface StravatronSummaryActivity {
   achievementCount: number;
   athleteId: number;
+  averageCadence: number;
+  averageHeartrate: number;
   averageSpeed: number;
   averageTemp?: number;
-  averageWatts: number;
+  averageWatts?: number;
+  city?: string;
+  country: string;
   deviceWatts?: boolean;
   distance: number;
   elapsedTime: number;
   elevHigh?: number;
   elevLow?: number;
   endLatlng: StravaNativeLatLng;
+  hasHeartrate: boolean;
   id: number;
-  kilojoules: number;
-  city?: string;
-  country: string;
-  state?: string;
+  kilojoules?: number;
   map: StravaNativePolylineMap; // does not include polyline
+  maxHeartrate: number;
+  maxWatts: number;
   maxSpeed: number;
   movingTime: number;
   name: string;
@@ -180,32 +163,63 @@ export interface StravatronSummaryActivity {
   startLongitude: number;
   timezone: string;
   totalElevationGain: number;
+  type: string;
+  utcOffset: number;
   weightedAverageWatts?: number;
 }
 
 export interface StravatronDetailedActivity extends StravatronSummaryActivity {
-  description: string;
-  calories: number;
-  segmentEfforts: StravatronSegmentEffort[];
 
-  averageCadence: number;
-  averageHeartrate: number;
+  calories: number;
+  description: string;
   deviceName: string;
-  hasHeartrate: boolean;
-  maxHeartrate: number;
-  maxWatts: number;
-  type: string;
-  utcOffset: number;
+  segmentEfforts: StravatronSegmentEffort[];
 
   bestEfforts?: any; // DetailedSegmentEffort or DetailedSegmentEffort[] ??
 }
 
-export interface StravaNativeLatLng {
-  latlng: number[];
-}
-
-export interface StravaNativePolylineMap {
-  id: string;
-  polyline: string;
-  summary_polyline: string;
+// detailsLoaded?
+export interface StravatronDetailedActivityAttributes {
+  achievementCount: number;
+  athleteId: number;
+  averageCadence: number;
+  averageHeartrate: number;
+  averageSpeed: number;
+  averageTemp?: number;
+  averageWatts?: number;
+  bestEfforts?: any; // DetailedSegmentEffort or DetailedSegmentEffort[] ??
+  calories: number;
+  city?: string;
+  country: string;
+  description: string;
+  detailsLoaded: boolean;
+  deviceName: string;
+  deviceWatts?: boolean;
+  distance: number;
+  elapsedTime: number;
+  elevHigh?: number;
+  elevLow?: number;
+  endLatlng: StravaNativeLatLng;
+  hasHeartrate: boolean;
+  id: number;
+  kilojoules?: number;
+  map: StravaNativePolylineMap; // does not include polyline
+  maxHeartrate: number;
+  maxSpeed: number;
+  maxWatts: number;
+  movingTime: number;
+  name: string;
+  prCount: number;
+  resourceState: number;
+  startDate: Date;
+  startDateLocal: Date;
+  startLatitude: number;
+  startLatlng: StravaNativeLatLng;
+  startLongitude: number;
+  state?: string;
+  timezone: string;
+  totalElevationGain: number;
+  weightedAverageWatts?: number;
+  type: string;
+  utcOffset: number;
 }
