@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -187,11 +188,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
           if (effortData.effortsSortedByDate.length > (index + 1)) {
             const effort = effortData.effortsSortedByDate[index + 1];
             recentEfforts[index] =
-              {
-                movingTime: effort.movingTime,
-                date: effort.startDateLocal,
-                separator: ', '
-              };
+            {
+              movingTime: effort.movingTime,
+              date: effort.startDateLocal,
+              separator: ', '
+            };
           }
           index++;
         }
@@ -335,6 +336,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     const segmentEffortsTable = this.buildSegmentEffortsTable();
     return (
       <div>
+        <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
+        <br/>
         {rideSummaryHeader}
         {segmentEffortsTable}
       </div>

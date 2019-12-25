@@ -5,10 +5,11 @@ import {
 } from '../type';
 
 const serverUrl = 'http://localhost:8000';
+const apiUrlFragment = '/api/v1/';
 
 export const loadDetailedActivity = (activityId: number): any => {
   return (dispatch: any, getState: any): any => {
-    const path = serverUrl + '/getDetailedActivity?activityId=' + activityId;
+    const path = serverUrl + apiUrlFragment + 'activity/' + activityId.toString();
     axios.get(path)
       .then((response) => {
 
