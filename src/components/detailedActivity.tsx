@@ -7,6 +7,8 @@ import { isNil } from 'lodash';
 
 import * as Converters from '../utilities/converters';
 
+import ChartComponent from './chart';
+
 import {
   loadDetailedActivity
 } from '../controller';
@@ -348,6 +350,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         <br />
         {rideSummaryHeader}
         {segmentEffortsTable}
+        <ChartComponent/>
       </div>
     );
   }
