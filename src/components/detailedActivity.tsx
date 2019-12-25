@@ -3,6 +3,8 @@ import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import Bar from './chartist';
+
 import { isNil } from 'lodash';
 
 import * as Converters from '../utilities/converters';
@@ -328,26 +330,25 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
   render(): any {
 
-    const activity = this.props.detailedActivity;
+    // const activity = this.props.detailedActivity;
 
-    console.log('detailedActivityAttributes');
-    console.log(activity);
+    // console.log('detailedActivityAttributes');
+    // console.log(activity);
 
-    console.log('segmentEfforts');
-    console.log(this.props.segmentEfforts);
+    // console.log('segmentEfforts');
+    // console.log(this.props.segmentEfforts);
 
-    if (isNil(activity) || this.props.segmentEfforts.length === 0) {
-      return <div>Loading...</div>;
-    }
+    // if (isNil(activity) || this.props.segmentEfforts.length === 0) {
+    //   return <div>Loading...</div>;
+    // }
 
-    const rideSummaryHeader = this.buildRideSummaryHeader(activity);
-    const segmentEffortsTable = this.buildSegmentEffortsTable();
+    // const rideSummaryHeader = this.buildRideSummaryHeader(activity);
+    // const segmentEffortsTable = this.buildSegmentEffortsTable();
+/*
+*/
     return (
       <div>
-        <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
-        <br />
-        {rideSummaryHeader}
-        {segmentEffortsTable}
+        <Bar/>
       </div>
     );
   }
