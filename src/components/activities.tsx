@@ -7,10 +7,11 @@ import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 
 // import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { ActivitiesMap, StravatronSummaryActivity } from '../type';
+import { ActivitiesMap, StravatronSummaryActivity, StravatronActivity } from '../type';
 import { getActivities } from '../selector';
 
 import * as Converters from '../utilities/converters';
+import { addActivity } from '../model';
 
 export interface ActivitiesProps {
   activities: ActivitiesMap;
@@ -29,15 +30,17 @@ class Activities extends React.Component<ActivitiesProps> {
     hashHistory.push('/detailedActivity/' + activityId.toString());
   }
 
-  buildSummaryActivityRow(activity: StravatronSummaryActivity): any {
+  buildSummaryActivityRow(activity: StravatronActivity): any {
 
     const self = this;
 
-    let calories = '';
+    let kilojoules = '';
     if (activity.kilojoules) {
-      calories = activity.kilojoules.toFixed(0);
+      kilojoules = activity.kilojoules.toFixed(0);
     }
 
+    const normalizedPower = isNil(activity.normalizedPower) ? '' : activity.normalizedPower.toFixed(1);
+    const tss = isNil(activity.trainingStressScore) ? '' : activity.trainingStressScore.toFixed(1);
     const averageWatts = isNil(activity.averageWatts) ? 0 : activity.averageWatts;
 
     return (
@@ -58,7 +61,13 @@ class Activities extends React.Component<ActivitiesProps> {
           {Converters.metersToFeet(activity.totalElevationGain).toFixed(0)} ft
         </td>
         <td>
-          {calories}
+          {kilojoules}
+        </td>
+        <td>
+          {normalizedPower}
+        </td>
+        <td>
+          {tss}
         </td>
         <td>
           {averageWatts}
@@ -133,7 +142,9 @@ class Activities extends React.Component<ActivitiesProps> {
                 <th>Riding Time</th>
                 <th>Distance</th>
                 <th>Elevation</th>
-                <th>Calories</th>
+                <th>Kilojoules</th>
+                <th>NP</th>
+                <th>TSS</th>
                 <th>Average Watts</th>
                 <th>Max Watts</th>
                 <th>Average Heartrate</th>

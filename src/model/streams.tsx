@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { 
-  StravatronStreams, 
+  StravatronActivityStreams, 
    
 } from '../type';
 import { StravaModelBaseAction, StreamsAction } from './baseAction';
@@ -15,11 +15,11 @@ export const ADD_STREAMS = 'ADD_STREAMS';
 // ------------------------------------
 
 export interface AddStreamsPayload {
-  streams: StravatronStreams;
+  streams: StravatronActivityStreams;
 }
 
 export const addStreams = (
-  streams: StravatronStreams
+  streams: StravatronActivityStreams
 ): StreamsAction<AddStreamsPayload> => {
 
   return {
@@ -34,7 +34,8 @@ export const addStreams = (
 // Reducer
 // ------------------------------------
 
-const initialState: StravatronStreams = {
+const initialState: StravatronActivityStreams = {
+  activityId: 0,
   time: [],
   location: [],
   elevation: [],
@@ -46,9 +47,9 @@ const initialState: StravatronStreams = {
 };
 
 export const streamsReducer = (
-  state: StravatronStreams = initialState,
-  action: StravaModelBaseAction<StravatronStreams & AddStreamsPayload>
-): StravatronStreams => {
+  state: StravatronActivityStreams = initialState,
+  action: StravaModelBaseAction<StravatronActivityStreams & AddStreamsPayload>
+): StravatronActivityStreams => {
   switch (action.type) {
     case ADD_STREAMS: {
       const newState = action.payload;

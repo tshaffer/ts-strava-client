@@ -55,7 +55,7 @@ export function elapsedTimeToTimeString(elapsedTime: string) {
 
   return moment().startOf('day')
     .seconds(Number(elapsedTime))
-    .format('mm:ss');
+    .format('h:mm:ss');
 }
 
 export function formatDate(date: string) {

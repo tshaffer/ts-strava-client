@@ -53,6 +53,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     }
 
     const averageWatts = isNil(detailedActivity.averageWatts) ? 0 : detailedActivity.averageWatts;
+    const np = isNil(detailedActivity.normalizedPower) ? '' : detailedActivity.normalizedPower.toFixed(1);
+    const tss = isNil(detailedActivity.trainingStressScore) ? '' : detailedActivity.trainingStressScore.toFixed(1);
 
     return (
       <div id='RideSummary'>
@@ -66,6 +68,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <td>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</td>
               <td>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</td>
               <td>{calories}</td>
+              <td>{np}</td>
+              <td>{tss}</td>
               <td>{averageWatts}</td>
               <td>{detailedActivity.maxWatts}</td>
               <td>{detailedActivity.averageHeartrate}</td>
@@ -77,7 +81,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <td>Time</td>
               <td>Elevation</td>
               <td>Distance</td>
-              <td>Calories</td>
+              <td>Kilojoules</td>
+              <td>NP</td>
+              <td>TSS</td>
               <td>Average Watts</td>
               <td>Max Watts</td>
               <td>Average Heart Rate</td>
@@ -148,7 +154,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
         const bestEffortTime = moment().startOf('day')
           .seconds(Number(effortData.effortsSortedByMovingTime[0].movingTime))
-          .format('mm:ss');
+          .format('h:mm:ss');
 
         const bestEffortDate = moment(effortData.effortsSortedByMovingTime[0].startDateLocal).format('YYYY-MM-DD');
 
@@ -163,7 +169,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         if (!isNil(effortData.effortsSortedByMovingTime[1])) {
           const nextBestEffortTime = moment().startOf('day')
             .seconds(Number(effortData.effortsSortedByMovingTime[1].movingTime))
-            .format('mm:ss');
+            .format('h:mm:ss');
           const nextBestEffortDate =
             moment(effortData.effortsSortedByMovingTime[1].startDateLocal).format('YYYY-MM-DD');
 

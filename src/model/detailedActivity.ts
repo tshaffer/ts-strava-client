@@ -1,6 +1,6 @@
 import { cloneDeep } from 'lodash';
 import { 
-  StravatronDetailedActivity, 
+  StravatronActivity, 
   DetailedActivityAttributesMap, 
   StravatronDetailedActivityAttributes
  } from '../type';
@@ -16,7 +16,7 @@ export const ADD_DETAILED_ACTIVITY_ATTRIBUTES = 'ADD_DETAILED_ACTIVITY_ATTRIBUTE
 // Actions
 // ------------------------------------
 
-export type PartialDetailedActivityDescription = Partial<StravatronDetailedActivity>;
+export type PartialDetailedActivityDescription = Partial<StravatronActivity>;
 
 export interface AddDetailedActivityAttributesPayload {
   activityId: string;
