@@ -2,7 +2,7 @@ import { filter, isNil } from 'lodash';
 
 import { 
   StravaModelState, 
-  StravatronDetailedActivityAttributes, 
+  StravatronActivity, 
   SegmentEffortsMap, 
   StravatronSummaryActivity, 
   SegmentsMap, 
@@ -10,9 +10,9 @@ import {
   StravatronSegmentEffortsBySegment, 
 } from '../type';
 
-export const getStravatronDetailedActivityAttributes = (state: StravaModelState, activityId: number): StravatronDetailedActivityAttributes => {
+export const getStravatronDetailedActivityAttributes = (state: StravaModelState, activityId: number): StravatronActivity => {
   const activity: StravatronSummaryActivity = state.activities[activityId];
-  const detailedActivity: StravatronDetailedActivityAttributes = state.detailedActivities[activityId];
+  const detailedActivity: StravatronActivity = state.detailedActivities[activityId];
   const fullActivity = Object.assign({}, activity, detailedActivity);
   return fullActivity;
 };

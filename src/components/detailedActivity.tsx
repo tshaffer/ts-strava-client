@@ -11,11 +11,11 @@ import {
   loadDetailedActivity
 } from '../controller';
 import {
-  StravatronDetailedActivityAttributes,
   SegmentsMap,
   StravatronDetailedSegment,
   StravatronSegmentEffortsBySegment,
   StravatronSegmentEffort,
+  StravatronActivity,
 } from '../type';
 import {
   getStravatronDetailedActivityAttributes,
@@ -27,7 +27,7 @@ import moment = require('moment');
 
 export interface DetailedActivityProps {
   params: any;
-  detailedActivity: StravatronDetailedActivityAttributes;
+  detailedActivity: StravatronActivity;
   segmentEfforts: StravatronSegmentEffort[];
   effortsForSegments: StravatronSegmentEffortsBySegment;
   segmentsMap: SegmentsMap;
@@ -41,7 +41,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     this.props.onLoadDetailedActivity(this.props.params.id);
   }
 
-  buildRideSummaryHeader(detailedActivity: StravatronDetailedActivityAttributes) {
+  buildRideSummaryHeader(detailedActivity: StravatronActivity) {
 
     if (isNil(detailedActivity)) {
       return <div>Loading</div>;

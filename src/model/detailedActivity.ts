@@ -2,7 +2,6 @@ import { cloneDeep } from 'lodash';
 import { 
   StravatronActivity, 
   DetailedActivityAttributesMap, 
-  StravatronDetailedActivityAttributes
  } from '../type';
 import { StravaModelBaseAction, DetailedActivityAction } from './baseAction';
 
@@ -20,12 +19,12 @@ export type PartialDetailedActivityDescription = Partial<StravatronActivity>;
 
 export interface AddDetailedActivityAttributesPayload {
   activityId: string;
-  detailedActivityAttributes: StravatronDetailedActivityAttributes;
+  detailedActivityAttributes: StravatronActivity;
 }
 
 export const addDetailedActivityAttributes = (
   activityId: number,
-  detailedActivityAttributes: StravatronDetailedActivityAttributes
+  detailedActivityAttributes: StravatronActivity
 ): any => {
   return {
     type: ADD_DETAILED_ACTIVITY_ATTRIBUTES,

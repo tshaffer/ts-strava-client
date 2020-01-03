@@ -1,7 +1,7 @@
 import {
   StravatronActivityStreams, 
   StravatronSummaryActivity, 
-  StravatronDetailedActivityAttributes, 
+  StravatronActivity, 
   StravatronDetailedSegment, 
   StravatronSegmentEffort
 } from './stravatron';
@@ -19,7 +19,7 @@ export interface ActivitiesMap {
 }
 
 export interface DetailedActivityAttributesMap {
-  [id: string]: StravatronDetailedActivityAttributes; // activityId
+  [id: string]: StravatronActivity; // activityId
 }
 
 export interface SegmentsMap {
