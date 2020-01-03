@@ -260,6 +260,10 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         </td>
     */
 
+    const { averageWatts, averageHeartrate, maxHeartrate, normalizedPower } = segmentEffort;
+    const normalizedPowerLbl = isNil(normalizedPower) ? '' : normalizedPower.toFixed(1);
+    const averageWattsLbl = isNil(averageWatts) ? 0 : averageWatts;
+
     return (
       <tr key={segmentEffort.id}>
         <td>
@@ -285,6 +289,18 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         </td>
         <td>
           {totalElevationGain}
+        </td>
+        <td>
+          {normalizedPowerLbl}
+        </td>
+        <td>
+          {averageWattsLbl}
+        </td>
+        <td>
+          {segmentEffort.averageHeartrate}
+        </td>
+        <td>
+          {segmentEffort.maxHeartrate}
         </td>
       </tr>
     );
@@ -321,6 +337,10 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <th>Speed</th>
               <th>Average Grade</th>
               <th>Elevation Gain</th>
+              <th>NP</th>
+              <th>Average Watts</th>
+              <th>Average Heartrate</th>
+              <th>Max Heartrate</th>
             </tr>
           </thead>
           <tbody>
@@ -342,7 +362,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     console.log('segmentEfforts');
     console.log(this.props.segmentEfforts);
 
-    if (isNil(activity) || this.props.segmentEfforts.length === 0) {
+    if (isNil(activity)) {
       return <div>Loading...</div>;
     }
 
