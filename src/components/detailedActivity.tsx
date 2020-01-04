@@ -8,7 +8,7 @@ import { isNil } from 'lodash';
 import * as Converters from '../utilities/converters';
 
 import {
-  loadDetailedActivity
+  loadDetailedActivity, forceReloadEfforts
 } from '../controller';
 import {
   SegmentsMap,
@@ -32,13 +32,25 @@ export interface DetailedActivityProps {
   effortsForSegments: StravatronSegmentEffortsBySegment;
   segmentsMap: SegmentsMap;
   onLoadDetailedActivity: (activityId: string) => any;
+  onForceReloadEfforts: (activityId: string) => any;
 }
 
 class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
+  constructor(props: DetailedActivityProps) {
+    super(props);
+
+    this.handleFetchEfforts = this.handleFetchEfforts.bind(this);
+  }
+
   componentWillMount() {
     console.log('DetailedActivity, id:', this.props.params.id);
     this.props.onLoadDetailedActivity(this.props.params.id);
+  }
+
+  handleFetchEfforts(activityId: any) {
+    console.log('handleFetchEfforts: ', activityId);
+    this.props.onForceReloadEfforts(this.props.params.id);
   }
 
   buildRideSummaryHeader(detailedActivity: StravatronActivity) {
@@ -373,6 +385,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
         <br />
         {rideSummaryHeader}
+        <button onClick={() => this.handleFetchEfforts(activity.id)}>Refresh efforts</button>
+        <br />
         {segmentEffortsTable}
       </div>
     );
@@ -393,6 +407,7 @@ function mapStateToProps(state: any, ownProps: any) {
 const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators({
     onLoadDetailedActivity: loadDetailedActivity,
+    onForceReloadEfforts: forceReloadEfforts,
   }, dispatch);
 };
 

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { addDetailedActivityAttributes, addSegment, addSegmentEffort, addStreams } from '../model';
-import { 
-  StravatronDetailedActivityData 
+import {
+  StravatronDetailedActivityData, StravatronSegmentEffort
 } from '../type';
 
 const serverUrl = 'http://localhost:8000';
@@ -16,7 +16,7 @@ export const loadDetailedActivity = (activityId: number): any => {
         const detailedActivityData: StravatronDetailedActivityData = response.data as StravatronDetailedActivityData;
 
         const { detailedActivityAttributes, segments, allSegmentEffortsForSegmentsInActivity, streams } = detailedActivityData;
-      
+
         dispatch(addDetailedActivityAttributes(activityId, detailedActivityAttributes));
 
         for (const detailedSegment of segments) {
@@ -29,6 +29,23 @@ export const loadDetailedActivity = (activityId: number): any => {
 
         dispatch(addStreams(streams));
 
+        console.log('done');
+        return;
+      }).catch((err: Error) => {
+        console.log(err);
+      });
+  };
+};
+
+export const forceReloadEfforts = (activityId: number): any => {
+  return (dispatch: any, getState: any): any => {
+    const path = serverUrl + apiUrlFragment + 'reloadEfforts/' + activityId.toString();
+    axios.get(path)
+      .then((response) => {
+        const allSegmentEffortsForSegmentsInActivity: StravatronSegmentEffort[] = response.data;
+        for (const segmentEffortInActivity of allSegmentEffortsForSegmentsInActivity) {
+          dispatch(addSegmentEffort(segmentEffortInActivity.id, segmentEffortInActivity));
+        }
         console.log('done');
         return;
       }).catch((err: Error) => {
