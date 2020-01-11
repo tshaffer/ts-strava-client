@@ -2,7 +2,8 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { hashHistory } from 'react-router';
 
-// import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { bindActionCreators } from 'redux';
 import { loadSummaryActivities } from '../controller';
@@ -29,13 +30,21 @@ class App extends React.Component<AppProps> {
 
   render() {
     return (
-      <div>
-        <h2>StravaTed</h2>
-        Eat more pizza and burgers!
+      <MuiThemeProvider>
+        <div>
+          <h2>StravaTed</h2>
+          Eat more pizza and burgers!
           <br />
-        <button onClick={this.handleShowActivities}>Show athlete activities</button>
-
-      </div>
+          <RaisedButton
+            label='Show athlete activities'
+            onClick={this.handleShowActivities}
+            style={{
+              verticalAlign: 'top',
+              marginTop: '18px'
+            }}
+          />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }
