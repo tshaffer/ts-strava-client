@@ -79,22 +79,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       <div id='RideSummary'>
         <Table className='summaryTable'>
 
-          <TableBody displayRowCheckbox={false}>
-
-            <TableRow className='summaryDataRow'>
-              <TableRowColumn>{detailedActivity.name}</TableRowColumn>
-              <TableRowColumn>{Converters.getMovingTime(detailedActivity.movingTime)}</TableRowColumn>
-              <TableRowColumn>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</TableRowColumn>
-              <TableRowColumn>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</TableRowColumn>
-              <TableRowColumn>{calories}</TableRowColumn>
-              <TableRowColumn>{np}</TableRowColumn>
-              <TableRowColumn>{tss}</TableRowColumn>
-              <TableRowColumn>{averageWatts}</TableRowColumn>
-              <TableRowColumn>{detailedActivity.maxWatts}</TableRowColumn>
-              <TableRowColumn>{detailedActivity.averageHeartrate}</TableRowColumn>
-              <TableRowColumn>{detailedActivity.maxHeartrate}</TableRowColumn>
-            </TableRow>
-
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
             <TableRow className='summaryLabels'>
               <TableHeaderColumn>{Converters.getDateTime(detailedActivity.startDateLocal)}</TableHeaderColumn>
               <TableHeaderColumn>Time</TableHeaderColumn>
@@ -108,8 +93,24 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
               <TableHeaderColumn>Average Heart Rate</TableHeaderColumn>
               <TableHeaderColumn>Max Heart Rate</TableHeaderColumn>
             </TableRow>
+          </TableHeader>
 
+          <TableBody displayRowCheckbox={false}>
+            <TableRow className='summaryDataRow'>
+              <TableRowColumn>{detailedActivity.name}</TableRowColumn>
+              <TableRowColumn>{Converters.getMovingTime(detailedActivity.movingTime)}</TableRowColumn>
+              <TableRowColumn>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</TableRowColumn>
+              <TableRowColumn>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</TableRowColumn>
+              <TableRowColumn>{calories}</TableRowColumn>
+              <TableRowColumn>{np}</TableRowColumn>
+              <TableRowColumn>{tss}</TableRowColumn>
+              <TableRowColumn>{averageWatts}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.maxWatts}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.averageHeartrate}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.maxHeartrate}</TableRowColumn>
+            </TableRow>
           </TableBody>
+
         </Table>
       </div >
     );
@@ -408,6 +409,9 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       <MuiThemeProvider>
         <div>
           {rideSummaryHeader}
+          <br />
+          <br />
+          <br />
           <br />
           {segmentEffortsTable}
         </div>
