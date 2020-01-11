@@ -392,7 +392,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       return <div>Loading...</div>;
     }
 
-    // const rideSummaryHeader = this.buildRideSummaryHeader(activity);
+    const rideSummaryHeader = this.buildRideSummaryHeader(activity);
     const segmentEffortsTable = this.buildSegmentEffortsTable();
     // return (
     //   <div>
