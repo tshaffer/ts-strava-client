@@ -406,7 +406,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     // );
     return (
       <MuiThemeProvider>
-        {segmentEffortsTable}
+        <div>
+          {rideSummaryHeader}
+          <br />
+          {segmentEffortsTable}
+        </div>
       </MuiThemeProvider>
     );
   }
