@@ -91,7 +91,7 @@ class Activities extends React.Component<ActivitiesProps> {
     );
   }
 
-  buildSummaryARow(activity: StravatronActivity): any {
+  buildSummaryRow(activity: StravatronActivity): any {
 
     const self = this;
 
@@ -188,44 +188,7 @@ class Activities extends React.Component<ActivitiesProps> {
 
     const self = this;
     const activityRows = activities.map((activity) => {
-      const activityRow = self.buildSummaryActivityRow(activity);
-      return activityRow;
-    });
-    return activityRows;
-
-  }
-
-  buildARows(): any[] {
-
-    const activities: StravatronSummaryActivity[] = [];
-
-    const activitiesLUT = this.props.activities;
-
-    for (const activityId in activitiesLUT) {
-      if (activitiesLUT.hasOwnProperty(activityId)) {
-        const activity = activitiesLUT[activityId];
-        activities.push(activity);
-      }
-    }
-
-    // sort by start_date
-    activities.sort((a, b) => {
-
-      const asd = new Date(a.startDateLocal).getTime();
-      const bsd = new Date(b.startDateLocal).getTime();
-
-      if (asd > bsd) {
-        return -1;
-      }
-      if (asd < bsd) {
-        return 1;
-      }
-      return 0;
-    });
-
-    const self = this;
-    const activityRows = activities.map((activity) => {
-      const activityRow = self.buildSummaryARow(activity);
+      const activityRow = self.buildSummaryRow(activity);
       return activityRow;
     });
     return activityRows;
@@ -235,8 +198,7 @@ class Activities extends React.Component<ActivitiesProps> {
 
     if (Object.keys(this.props.activities).length > 0) {
 
-      // const activityRows = this.buildActivityRows();
-      const aRows = this.buildARows();
+      const activityRows = this.buildActivityRows();
 
       return (
         <MuiThemeProvider>
@@ -269,7 +231,7 @@ class Activities extends React.Component<ActivitiesProps> {
               <TableBody
                 displayRowCheckbox={false}
               >
-                {aRows}
+                {activityRows}
               </TableBody>
             </Table>
           </div>
@@ -281,31 +243,6 @@ class Activities extends React.Component<ActivitiesProps> {
         Loading...
       </div>
     );
-    /*
-                <table id='activitiesTable'>
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th>Name</th>
-                      <th>Riding Time</th>
-                      <th>Distance</th>
-                      <th>Elevation</th>
-                      <th>Kilojoules</th>
-                      <th>NP</th>
-                      <th>TSS</th>
-                      <th>Average Watts</th>
-                      <th>Max Watts</th>
-                      <th>Average Heartrate</th>
-                      <th>Max Heartrate</th>
-                      <th />
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {activityRows}
-                  </tbody>
-                </table>
-              
-    */
   }
 }
 

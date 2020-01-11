@@ -346,60 +346,35 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     return (
       <div>
-      <Table>
-        <TableHeader
-          displaySelectAll={false}
-          adjustForCheckbox={false}
-          enableSelectAll={false}
-        >
-          <TableRow>
-            <TableHeaderColumn>Name</TableHeaderColumn>
-            <TableHeaderColumn>Time</TableHeaderColumn>
-            <TableHeaderColumn>Best Times</TableHeaderColumn>
-            <TableHeaderColumn>Recent Efforts</TableHeaderColumn>
-            <TableHeaderColumn>Distance</TableHeaderColumn>
-            <TableHeaderColumn>Speed</TableHeaderColumn>
-            <TableHeaderColumn>Average Grade</TableHeaderColumn>
-            <TableHeaderColumn>Elevation Gain</TableHeaderColumn>
-            <TableHeaderColumn>NP</TableHeaderColumn>
-            <TableHeaderColumn>Average Watts</TableHeaderColumn>
-            <TableHeaderColumn>Average Heartrate</TableHeaderColumn>
-            <TableHeaderColumn>Max Heartrate</TableHeaderColumn>
-            <TableHeaderColumn></TableHeaderColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody
-          displayRowCheckbox={false}
-        >
-          {segmentEffortRows}
-        </TableBody>
-
-      </Table>
-    </div>
-
-      // <div id='DetailedActivity' className='detailsActivity'>
-      //   <table id='DetailedActivityTable' className='detailsActivityTable'>
-      //     <thead>
-      //       <tr>
-      //         <th>Name</th>
-      //         <th>Time</th>
-      //         <th>Best Times</th>
-      //         <th>Recent Efforts</th>
-      //         <th>Distance</th>
-      //         <th>Speed</th>
-      //         <th>Average Grade</th>
-      //         <th>Elevation Gain</th>
-      //         <th>NP</th>
-      //         <th>Average Watts</th>
-      //         <th>Average Heartrate</th>
-      //         <th>Max Heartrate</th>
-      //       </tr>
-      //     </thead>
-      //     <tbody>
-      //       {segmentEffortRows}
-      //     </tbody>
-      //   </table>
-      // </div>
+        <Table>
+          <TableHeader
+            displaySelectAll={false}
+            adjustForCheckbox={false}
+            enableSelectAll={false}
+          >
+            <TableRow>
+              <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn>Time</TableHeaderColumn>
+              <TableHeaderColumn>Best Times</TableHeaderColumn>
+              <TableHeaderColumn>Recent Efforts</TableHeaderColumn>
+              <TableHeaderColumn>Distance</TableHeaderColumn>
+              <TableHeaderColumn>Speed</TableHeaderColumn>
+              <TableHeaderColumn>Average Grade</TableHeaderColumn>
+              <TableHeaderColumn>Elevation Gain</TableHeaderColumn>
+              <TableHeaderColumn>NP</TableHeaderColumn>
+              <TableHeaderColumn>Average Watts</TableHeaderColumn>
+              <TableHeaderColumn>Average Heartrate</TableHeaderColumn>
+              <TableHeaderColumn>Max Heartrate</TableHeaderColumn>
+              <TableHeaderColumn></TableHeaderColumn>
+            </TableRow>
+          </TableHeader>
+          <TableBody
+            displayRowCheckbox={false}
+          >
+            {segmentEffortRows}
+          </TableBody>
+        </Table>
+      </div>
     );
   }
 
