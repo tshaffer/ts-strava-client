@@ -9,12 +9,13 @@ module.exports = {
     filename: "bundle.js",
     path: __dirname + "/build"
   },
-
+  devtool: "source-map",
   target: 'web',
 
   plugins: [
     new CopyWebpackPlugin([
-        {from:'./build/bundle.js', to:'../../ts-strava-server/public/build'}
+        {from:'./build/bundle.js', to:'../../ts-strava-server/public/build'},
+        {from:'./build/bundle.js.map', to:'../../ts-strava-server/public/build'},
     ]),
   ],
 
