@@ -77,41 +77,41 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     return (
       <div id='RideSummary'>
-        <table className='summaryTable'>
+        <Table className='summaryTable'>
 
-          <tbody>
+          <TableBody displayRowCheckbox={false}>
 
-            <tr className='summaryDataRow'>
-              <td>{detailedActivity.name}</td>
-              <td>{Converters.getMovingTime(detailedActivity.movingTime)}</td>
-              <td>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</td>
-              <td>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</td>
-              <td>{calories}</td>
-              <td>{np}</td>
-              <td>{tss}</td>
-              <td>{averageWatts}</td>
-              <td>{detailedActivity.maxWatts}</td>
-              <td>{detailedActivity.averageHeartrate}</td>
-              <td>{detailedActivity.maxHeartrate}</td>
-            </tr>
+            <TableRow className='summaryDataRow'>
+              <TableRowColumn>{detailedActivity.name}</TableRowColumn>
+              <TableRowColumn>{Converters.getMovingTime(detailedActivity.movingTime)}</TableRowColumn>
+              <TableRowColumn>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</TableRowColumn>
+              <TableRowColumn>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</TableRowColumn>
+              <TableRowColumn>{calories}</TableRowColumn>
+              <TableRowColumn>{np}</TableRowColumn>
+              <TableRowColumn>{tss}</TableRowColumn>
+              <TableRowColumn>{averageWatts}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.maxWatts}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.averageHeartrate}</TableRowColumn>
+              <TableRowColumn>{detailedActivity.maxHeartrate}</TableRowColumn>
+            </TableRow>
 
-            <tr className='summaryLabels'>
-              <td>{Converters.getDateTime(detailedActivity.startDateLocal)}</td>
-              <td>Time</td>
-              <td>Elevation</td>
-              <td>Distance</td>
-              <td>Kilojoules</td>
-              <td>NP</td>
-              <td>TSS</td>
-              <td>Average Watts</td>
-              <td>Max Watts</td>
-              <td>Average Heart Rate</td>
-              <td>Max Heart Rate</td>
-            </tr>
+            <TableRow className='summaryLabels'>
+              <TableHeaderColumn>{Converters.getDateTime(detailedActivity.startDateLocal)}</TableHeaderColumn>
+              <TableHeaderColumn>Time</TableHeaderColumn>
+              <TableHeaderColumn>Elevation</TableHeaderColumn>
+              <TableHeaderColumn>Distance</TableHeaderColumn>
+              <TableHeaderColumn>Kilojoules</TableHeaderColumn>
+              <TableHeaderColumn>NP</TableHeaderColumn>
+              <TableHeaderColumn>TSS</TableHeaderColumn>
+              <TableHeaderColumn>Average Watts</TableHeaderColumn>
+              <TableHeaderColumn>Max Watts</TableHeaderColumn>
+              <TableHeaderColumn>Average Heart Rate</TableHeaderColumn>
+              <TableHeaderColumn>Max Heart Rate</TableHeaderColumn>
+            </TableRow>
 
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </div >
     );
   }
 
