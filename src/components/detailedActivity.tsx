@@ -1,4 +1,11 @@
 import * as React from 'react';
+
+// import Link from '@material-ui/core/Link';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn } from 'material-ui/Table';
+import RaisedButton from 'material-ui/RaisedButton';
+
+
 import { Link } from 'react-router';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -277,44 +284,46 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     const averageWattsLbl = isNil(averageWatts) ? 0 : averageWatts;
 
     return (
-      <tr key={segmentEffort.id}>
-        <td>
+      <TableRow key={segmentEffort.id}>
+        <TableRowColumn>
           {segmentEffort.name}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {Converters.getMovingTime(segmentEffort.movingTime)}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {effortsForSegmentLbl}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {recentEffortsLbl}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {Converters.metersToMiles(segmentEffort.distance).toFixed(1)} mi
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {Converters.metersPerSecondToMilesPerHour(speed).toFixed(1)} mph
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {averageGrade}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {totalElevationGain}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {normalizedPowerLbl}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {averageWattsLbl}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {segmentEffort.averageHeartrate}
-        </td>
-        <td>
+        </TableRowColumn>
+        <TableRowColumn>
           {segmentEffort.maxHeartrate}
-        </td>
-      </tr>
+        </TableRowColumn>
+        <TableRowColumn>
+        </TableRowColumn>
+      </TableRow>
     );
   }
 
@@ -336,31 +345,61 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     const segmentEffortRows = this.buildSegmentEffortRows(this.props.segmentEfforts);
 
     return (
+      <div>
+      <Table>
+        <TableHeader
+          displaySelectAll={false}
+          adjustForCheckbox={false}
+          enableSelectAll={false}
+        >
+          <TableRow>
+            <TableHeaderColumn>Name</TableHeaderColumn>
+            <TableHeaderColumn>Time</TableHeaderColumn>
+            <TableHeaderColumn>Best Times</TableHeaderColumn>
+            <TableHeaderColumn>Recent Efforts</TableHeaderColumn>
+            <TableHeaderColumn>Distance</TableHeaderColumn>
+            <TableHeaderColumn>Speed</TableHeaderColumn>
+            <TableHeaderColumn>Average Grade</TableHeaderColumn>
+            <TableHeaderColumn>Elevation Gain</TableHeaderColumn>
+            <TableHeaderColumn>NP</TableHeaderColumn>
+            <TableHeaderColumn>Average Watts</TableHeaderColumn>
+            <TableHeaderColumn>Average Heartrate</TableHeaderColumn>
+            <TableHeaderColumn>Max Heartrate</TableHeaderColumn>
+            <TableHeaderColumn></TableHeaderColumn>
+          </TableRow>
+        </TableHeader>
+        <TableBody
+          displayRowCheckbox={false}
+        >
+          {segmentEffortRows}
+        </TableBody>
 
-      <div id='DetailedActivity' className='detailsActivity'>
-        <table id='DetailedActivityTable' className='detailsActivityTable'>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Time</th>
-              <th>Best Times</th>
-              <th>Recent Efforts</th>
-              <th>Distance</th>
-              <th>Speed</th>
-              <th>Average Grade</th>
-              <th>Elevation Gain</th>
-              <th>NP</th>
-              <th>Average Watts</th>
-              <th>Average Heartrate</th>
-              <th>Max Heartrate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {segmentEffortRows}
-          </tbody>
-        </table>
-      </div>
+      </Table>
+    </div>
 
+      // <div id='DetailedActivity' className='detailsActivity'>
+      //   <table id='DetailedActivityTable' className='detailsActivityTable'>
+      //     <thead>
+      //       <tr>
+      //         <th>Name</th>
+      //         <th>Time</th>
+      //         <th>Best Times</th>
+      //         <th>Recent Efforts</th>
+      //         <th>Distance</th>
+      //         <th>Speed</th>
+      //         <th>Average Grade</th>
+      //         <th>Elevation Gain</th>
+      //         <th>NP</th>
+      //         <th>Average Watts</th>
+      //         <th>Average Heartrate</th>
+      //         <th>Max Heartrate</th>
+      //       </tr>
+      //     </thead>
+      //     <tbody>
+      //       {segmentEffortRows}
+      //     </tbody>
+      //   </table>
+      // </div>
     );
   }
 
@@ -378,17 +417,22 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
       return <div>Loading...</div>;
     }
 
-    const rideSummaryHeader = this.buildRideSummaryHeader(activity);
+    // const rideSummaryHeader = this.buildRideSummaryHeader(activity);
     const segmentEffortsTable = this.buildSegmentEffortsTable();
+    // return (
+    //   <div>
+    //     <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
+    //     <br />
+    //     {rideSummaryHeader}
+    //     <button onClick={() => this.handleFetchEfforts(activity.id)}>Refresh efforts</button>
+    //     <br />
+    //     {segmentEffortsTable}
+    //   </div>
+    // );
     return (
-      <div>
-        <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
-        <br />
-        {rideSummaryHeader}
-        <button onClick={() => this.handleFetchEfforts(activity.id)}>Refresh efforts</button>
-        <br />
+      <MuiThemeProvider>
         {segmentEffortsTable}
-      </div>
+      </MuiThemeProvider>
     );
   }
 }
