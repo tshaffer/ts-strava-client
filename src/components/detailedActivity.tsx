@@ -81,8 +81,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
           <TableHeader displaySelectAll={false} adjustForCheckbox={false} enableSelectAll={false}>
             <TableRow className='summaryLabels'>
-              <TableHeaderColumn>{Converters.getDateTime(detailedActivity.startDateLocal)}</TableHeaderColumn>
-              <TableHeaderColumn>Time</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '192px'}}>{Converters.getDateTime(detailedActivity.startDateLocal)}</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '64px'}}>Time</TableHeaderColumn>
               <TableHeaderColumn>Elevation</TableHeaderColumn>
               <TableHeaderColumn>Distance</TableHeaderColumn>
               <TableHeaderColumn>Kilojoules</TableHeaderColumn>
@@ -97,8 +97,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
           <TableBody displayRowCheckbox={false}>
             <TableRow className='summaryDataRow'>
-              <TableRowColumn>{detailedActivity.name}</TableRowColumn>
-              <TableRowColumn>{Converters.getMovingTime(detailedActivity.movingTime)}</TableRowColumn>
+              <TableRowColumn style={{width: '192px'}}>{detailedActivity.name}</TableRowColumn>
+              <TableRowColumn style={{width: '64px'}}>{Converters.getMovingTime(detailedActivity.movingTime)}</TableRowColumn>
               <TableRowColumn>{Converters.metersToFeet(detailedActivity.totalElevationGain).toFixed(0)} ft</TableRowColumn>
               <TableRowColumn>{Converters.metersToMiles(detailedActivity.distance).toFixed(1)} mi</TableRowColumn>
               <TableRowColumn>{calories}</TableRowColumn>
@@ -408,8 +408,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     return (
       <MuiThemeProvider>
         <div>
+          <Link to='/activities' id='backFromDetailedActivityButton'>Back</Link>
+          <br />
           {rideSummaryHeader}
           <br />
+          <button onClick={() => this.handleFetchEfforts(activity.id)}>Refresh efforts</button>
           <br />
           <br />
           <br />
