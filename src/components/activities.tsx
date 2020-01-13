@@ -106,10 +106,10 @@ class Activities extends React.Component<ActivitiesProps> {
 
     return (
       <TableRow key={activity.id}>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {Converters.getDateTime(activity.startDateLocal)}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '192px'}}>
           {activity.name}
         </TableRowColumn>
         <TableRowColumn>
@@ -212,8 +212,8 @@ class Activities extends React.Component<ActivitiesProps> {
                 enableSelectAll={false}
               >
                 <TableRow>
-                  <TableHeaderColumn>Date</TableHeaderColumn>
-                  <TableHeaderColumn>Name</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px'}}>Date</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '192px'}}>Name</TableHeaderColumn>
                   <TableHeaderColumn>Riding Time</TableHeaderColumn>
                   <TableHeaderColumn>Distance</TableHeaderColumn>
                   <TableHeaderColumn>Elevation</TableHeaderColumn>

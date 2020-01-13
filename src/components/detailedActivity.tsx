@@ -286,10 +286,10 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     return (
       <TableRow key={segmentEffort.id}>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '192px'}}>
           {segmentEffort.name}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {Converters.getMovingTime(segmentEffort.movingTime)}
         </TableRowColumn>
         <TableRowColumn>
@@ -332,7 +332,21 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
 
     const self = this;
 
-    const segmentEffortRows = segmentEfforts.map((segmentEffort) => {
+    const sortedSegmentEffortRows: StravatronSegmentEffort[] = segmentEfforts.concat();
+    sortedSegmentEffortRows.sort((a, b) => {
+      const aStartTime = a.startDate;
+      const bStartTime = b.startDate;
+
+      if (aStartTime > bStartTime) {
+        return 1;
+      }
+      if (aStartTime < bStartTime) {
+        return -1;
+      }
+      return 0;
+    });
+
+    const segmentEffortRows = sortedSegmentEffortRows.map((segmentEffort) => {
       const segmentEffortRow = self.buildSegmentEffortRow(segmentEffort);
       return segmentEffortRow;
     });
@@ -354,8 +368,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
             enableSelectAll={false}
           >
             <TableRow>
-              <TableHeaderColumn>Name</TableHeaderColumn>
-              <TableHeaderColumn>Time</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '192px'}}>Name</TableHeaderColumn>
+              <TableHeaderColumn style={{width: '64px'}}>Time</TableHeaderColumn>
               <TableHeaderColumn>Best Times</TableHeaderColumn>
               <TableHeaderColumn>Recent Efforts</TableHeaderColumn>
               <TableHeaderColumn>Distance</TableHeaderColumn>
