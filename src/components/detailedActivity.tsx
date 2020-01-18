@@ -15,7 +15,7 @@ import { isNil } from 'lodash';
 import * as Converters from '../utilities/converters';
 
 import {
-  loadDetailedActivity, forceReloadEfforts
+  loadDetailedActivity, forceReloadEfforts, getMmpData,
 } from '../controller';
 import {
   SegmentsMap,
@@ -40,6 +40,7 @@ export interface DetailedActivityProps {
   segmentsMap: SegmentsMap;
   onLoadDetailedActivity: (activityId: string) => any;
   onForceReloadEfforts: (activityId: string) => any;
+  onGetMmpData: (activityId: string) => any;
 }
 
 class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
@@ -48,6 +49,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
     super(props);
 
     this.handleFetchEfforts = this.handleFetchEfforts.bind(this);
+    this.handleGetMmpData = this.handleGetMmpData.bind(this);
   }
 
   componentWillMount() {
@@ -58,6 +60,11 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
   handleFetchEfforts(activityId: any) {
     console.log('handleFetchEfforts: ', activityId);
     this.props.onForceReloadEfforts(this.props.params.id);
+  }
+
+  handleGetMmpData(activityId: any) {
+    console.log('handleGetMmpData: ', activityId);
+    this.props.onGetMmpData(this.props.params.id);
   }
 
   buildRideSummaryHeader(detailedActivity: StravatronActivity) {
@@ -428,6 +435,8 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
           <br />
           <button onClick={() => this.handleFetchEfforts(activity.id)}>Refresh efforts</button>
           <br />
+          <button onClick={() => this.handleGetMmpData(activity.id)}>Get MMP Data</button>
+          <br />
           <br />
           <br />
           {segmentEffortsTable}
@@ -452,6 +461,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return bindActionCreators({
     onLoadDetailedActivity: loadDetailedActivity,
     onForceReloadEfforts: forceReloadEfforts,
+    onGetMmpData: getMmpData,
   }, dispatch);
 };
 

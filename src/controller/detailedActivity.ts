@@ -53,3 +53,18 @@ export const forceReloadEfforts = (activityId: number): any => {
       });
   };
 };
+
+export const getMmpData = (activityId: number): any => {
+  return (dispatch: any, getState: any): any => {
+    const path = serverUrl + apiUrlFragment + 'meanMaximalPowerData/' + activityId.toString();
+    axios.get(path)
+      .then((response) => {
+        console.log('getMmpData - ok');
+        return;
+      }).catch((err: Error) => {
+        console.log(err);
+      });
+  };
+};
+
+
