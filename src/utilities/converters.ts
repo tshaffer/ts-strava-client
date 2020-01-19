@@ -48,14 +48,8 @@ export function metersPerSecondToMilesPerHour(speed: number) {
   return speed * 2.23694;
 }
 
-export function elapsedTimeToTimeString(elapsedTime: string) {
-  if (elapsedTime === '') {
-    return '';
-  }
-
-  return moment().startOf('day')
-    .seconds(Number(elapsedTime))
-    .format('h:mm:ss');
+export function elapsedTimeToTimeString(elapsedTime: number) {
+  return getMovingTime(elapsedTime);
 }
 
 export function formatDate(date: string) {

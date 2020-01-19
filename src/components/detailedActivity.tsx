@@ -170,6 +170,10 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
   // TEDTODO - come up with a better name - it's not just recent efforts
   buildRecentEfforts(segmentId: number): any {
 
+    // if (segmentId === 18385727) {
+    //   debugger;
+    // }
+
     let recentEffortsLbl: any;
     let effortsForSegmentLbl: any;
 
@@ -179,10 +183,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
         const effortsForSegment: StravatronSegmentEffort[] = effortsForSegments[segmentId];
         const effortData = this.analyzeEffortsForSegment(effortsForSegment);
 
-        const bestEffortTime = moment().startOf('day')
-          .seconds(Number(effortData.effortsSortedByMovingTime[0].movingTime))
-          .format('h:mm:ss');
-
+        const bestEffortTime = Converters.getMovingTime(effortData.effortsSortedByMovingTime[0].movingTime);
         const bestEffortDate = moment(effortData.effortsSortedByMovingTime[0].startDateLocal).format('YYYY-MM-DD');
 
         effortsForSegmentLbl =
@@ -194,9 +195,7 @@ class DetailedActivityComponent extends React.Component<DetailedActivityProps> {
           );
 
         if (!isNil(effortData.effortsSortedByMovingTime[1])) {
-          const nextBestEffortTime = moment().startOf('day')
-            .seconds(Number(effortData.effortsSortedByMovingTime[1].movingTime))
-            .format('h:mm:ss');
+          const nextBestEffortTime = Converters.getMovingTime(effortData.effortsSortedByMovingTime[1].movingTime);
           const nextBestEffortDate =
             moment(effortData.effortsSortedByMovingTime[1].startDateLocal).format('YYYY-MM-DD');
 
