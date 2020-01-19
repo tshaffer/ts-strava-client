@@ -112,37 +112,37 @@ class Activities extends React.Component<ActivitiesProps> {
         <TableRowColumn style={{width: '192px'}}>
           {activity.name}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {Converters.getMovingTime(activity.movingTime)}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {Converters.metersToMiles(activity.distance).toFixed(1)} mi
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {Converters.metersToFeet(activity.totalElevationGain).toFixed(0)} ft
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {kilojoules}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {normalizedPower}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {tss}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {averageWatts}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {activity.maxWatts}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {activity.averageHeartrate}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           {activity.maxHeartrate}
         </TableRowColumn>
-        <TableRowColumn>
+        <TableRowColumn style={{width: '64px'}}>
           <RaisedButton
             label='Show details'
             onClick={() => self.handleShowDetailedMap(activity.id)}
@@ -205,27 +205,26 @@ class Activities extends React.Component<ActivitiesProps> {
           <div id='SummaryActivities'>
             <br />
 
-            <Table>
+            <Table style={{width: '1597px'}}>
               <TableHeader
                 displaySelectAll={false}
                 adjustForCheckbox={false}
                 enableSelectAll={false}
               >
                 <TableRow>
-                  <TableHeaderColumn style={{width: '64px'}}>Date</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Date</TableHeaderColumn>
                   <TableHeaderColumn style={{width: '192px'}}>Name</TableHeaderColumn>
-                  <TableHeaderColumn>Riding Time</TableHeaderColumn>
-                  <TableHeaderColumn>Distance</TableHeaderColumn>
-                  <TableHeaderColumn>Elevation</TableHeaderColumn>
-                  <TableHeaderColumn>Kilojoules</TableHeaderColumn>
-                  <TableHeaderColumn>Riding Time</TableHeaderColumn>
-                  <TableHeaderColumn>NP</TableHeaderColumn>
-                  <TableHeaderColumn>TSS</TableHeaderColumn>
-                  <TableHeaderColumn>Average Watts</TableHeaderColumn>
-                  <TableHeaderColumn>Max Watts</TableHeaderColumn>
-                  <TableHeaderColumn>Average Heartrate</TableHeaderColumn>
-                  <TableHeaderColumn>Max Heartrate</TableHeaderColumn>
-                  <TableHeaderColumn></TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Riding Time</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Distance</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Elevation</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Kilojoules</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>NP</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>TSS</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Average Watts</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Max Watts</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Average Heartrate</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}>Max Heartrate</TableHeaderColumn>
+                  <TableHeaderColumn style={{width: '64px', whiteSpace: 'normal'}}></TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody

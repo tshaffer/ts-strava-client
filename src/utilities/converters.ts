@@ -1,6 +1,6 @@
 import * as moment from 'moment';
 
-export function getMovingTime(moving_time: number) {
+export function getMovingTime(moving_time: number): string {
 
   const hours = Math.floor(moving_time / 3600);
 
